@@ -1,0 +1,1919 @@
+apiVersion: v1
+items:
+- apiVersion: local.storage.openshift.io/v1alpha1
+  kind: LocalVolumeSet
+  metadata:
+    creationTimestamp: "2025-07-15T12:12:29Z"
+    finalizers:
+    - storage.openshift.com/local-volume-protection
+    generation: 1
+    name: lso-volumeset
+    namespace: openshift-local-storage
+    resourceVersion: "321848"
+    uid: 216080a6-30f0-4aef-9390-77cda60d90b0
+  spec:
+    deviceInclusionSpec:
+      deviceTypes:
+      - disk
+      - part
+      minSize: 1Gi
+    nodeSelector:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker01
+          - worker02
+          - worker03
+    storageClassName: lso-volumeset
+    tolerations:
+    - effect: NoSchedule
+      key: node.ocs.openshift.io/storage
+      operator: Equal
+      value: "true"
+    volumeMode: Block
+  status:
+    conditions:
+    - lastTransitionTime: "2025-07-15T12:12:29Z"
+      message: 'DiskMaker: Available'
+      status: "True"
+      type: DaemonSetsAvailable
+    - lastTransitionTime: "2025-07-15T12:12:30Z"
+      message: Operator reconciled successfully.
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    totalProvisionedDeviceCount: 9
+- apiVersion: ocs.openshift.io/v1
+  kind: StorageCluster
+  metadata:
+    annotations:
+      cluster.ocs.openshift.io/local-devices: "true"
+      uninstall.ocs.openshift.io/cleanup-policy: delete
+      uninstall.ocs.openshift.io/mode: graceful
+    creationTimestamp: "2025-07-15T12:14:10Z"
+    finalizers:
+    - storagecluster.ocs.openshift.io
+    generation: 2
+    name: ocs-storagecluster
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: odf.openshift.io/v1alpha1
+      kind: StorageSystem
+      name: ocs-storagecluster-storagesystem
+      uid: 2b774407-1ec3-4c55-ade5-0593ea24b8c0
+    resourceVersion: "447779"
+    uid: f828159a-cf21-4968-b5d6-37ba4fca3032
+  spec:
+    arbiter: {}
+    encryption:
+      keyRotation:
+        schedule: '@weekly'
+      kms: {}
+    externalStorage: {}
+    flexibleScaling: true
+    managedResources:
+      cephBlockPools: {}
+      cephCluster: {}
+      cephConfig: {}
+      cephDashboard: {}
+      cephFilesystems:
+        dataPoolSpec:
+          application: ""
+          erasureCoded:
+            codingChunks: 0
+            dataChunks: 0
+          mirroring: {}
+          quotas: {}
+          replicated:
+            size: 0
+          statusCheck:
+            mirror: {}
+      cephNonResilientPools:
+        count: 1
+        resources: {}
+        volumeClaimTemplate:
+          metadata: {}
+          spec:
+            resources: {}
+          status: {}
+      cephObjectStoreUsers: {}
+      cephObjectStores: {}
+      cephRBDMirror:
+        daemonCount: 1
+      cephToolbox: {}
+    mirroring: {}
+    monDataDirHostPath: /var/lib/rook
+    network:
+      connections:
+        encryption: {}
+      multiClusterService: {}
+    nodeTopologies: {}
+    resourceProfile: balanced
+    storageDeviceSets:
+    - config: {}
+      count: 9
+      dataPVCTemplate:
+        metadata: {}
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: "1"
+          storageClassName: lso-volumeset
+          volumeMode: Block
+        status: {}
+      name: ocs-deviceset-lso-volumeset
+      placement: {}
+      preparePlacement: {}
+      replica: 1
+      resources: {}
+  status:
+    conditions:
+    - lastHeartbeatTime: "2025-07-15T12:14:10Z"
+      lastTransitionTime: "2025-07-15T12:14:10Z"
+      message: Version check successful
+      reason: VersionMatched
+      status: "False"
+      type: VersionMismatch
+    - lastHeartbeatTime: "2025-07-15T14:34:14Z"
+      lastTransitionTime: "2025-07-15T12:17:43Z"
+      message: Reconcile completed successfully
+      reason: ReconcileCompleted
+      status: "True"
+      type: ReconcileComplete
+    - lastHeartbeatTime: "2025-07-15T12:16:44Z"
+      lastTransitionTime: "2025-07-15T12:16:44Z"
+      message: Reconcile completed successfully
+      reason: ReconcileCompleted
+      status: "True"
+      type: Available
+    - lastHeartbeatTime: "2025-07-15T14:34:14Z"
+      lastTransitionTime: "2025-07-15T12:16:46Z"
+      message: Waiting on Nooba instance to finish initialization
+      reason: NoobaaInitializing
+      status: "True"
+      type: Progressing
+    - lastHeartbeatTime: "2025-07-15T12:16:44Z"
+      lastTransitionTime: "2025-07-15T12:14:10Z"
+      message: Reconcile completed successfully
+      reason: ReconcileCompleted
+      status: "False"
+      type: Degraded
+    - lastHeartbeatTime: "2025-07-15T12:17:46Z"
+      lastTransitionTime: "2025-07-15T12:16:54Z"
+      message: 'CephCluster is creating: Processing OSD 7 on PVC "ocs-deviceset-lso-volumeset-0-data-7ctnkn"'
+      reason: ClusterStateCreating
+      status: "False"
+      type: Upgradeable
+    currentMonCount: 3
+    defaultCephDeviceClass: ssd
+    failureDomain: host
+    failureDomainKey: kubernetes.io/hostname
+    failureDomainValues:
+    - worker01
+    - worker02
+    - worker03
+    images:
+      ceph:
+        actualImage: registry.redhat.io/rhceph/rhceph-7-rhel9@sha256:75bd8969ab3f86f2203a1ceb187876f44e54c9ee3b917518c4d696cf6cd88ce3
+        desiredImage: registry.redhat.io/rhceph/rhceph-7-rhel9@sha256:75bd8969ab3f86f2203a1ceb187876f44e54c9ee3b917518c4d696cf6cd88ce3
+      noobaaCore:
+        actualImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:728d12151320b501b63ae8cd60f10430532d3e0d231e2fcf02098c36e7e64249
+        desiredImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:728d12151320b501b63ae8cd60f10430532d3e0d231e2fcf02098c36e7e64249
+      noobaaDB:
+        actualImage: registry.redhat.io/rhel9/postgresql-15@sha256:f1f581d8974799f17d4707f9161b2d0568a07255e535ca3be3b36ce254b091a4
+        desiredImage: registry.redhat.io/rhel9/postgresql-15@sha256:f1f581d8974799f17d4707f9161b2d0568a07255e535ca3be3b36ce254b091a4
+    kmsServerConnection: {}
+    lastAppliedResourceProfile: balanced
+    nodeTopologies:
+      labels:
+        kubernetes.io/hostname:
+        - worker01
+        - worker02
+        - worker03
+    phase: Progressing
+    relatedObjects:
+    - apiVersion: ceph.rook.io/v1
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      namespace: openshift-storage
+      resourceVersion: "447766"
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    - apiVersion: noobaa.io/v1alpha1
+      kind: NooBaa
+      name: noobaa
+      namespace: openshift-storage
+      resourceVersion: "447730"
+      uid: a2b28bce-68ad-4f5e-b861-29a08b59f93b
+    version: 4.16.1
+- apiVersion: ceph.rook.io/v1
+  kind: CephCluster
+  metadata:
+    creationTimestamp: "2025-07-15T12:14:10Z"
+    finalizers:
+    - cephcluster.ceph.rook.io
+    generation: 2
+    labels:
+      app: ocs-storagecluster
+    name: ocs-storagecluster-cephcluster
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ocs.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: StorageCluster
+      name: ocs-storagecluster
+      uid: f828159a-cf21-4968-b5d6-37ba4fca3032
+    resourceVersion: "447766"
+    uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+  spec:
+    cephVersion:
+      image: registry.redhat.io/rhceph/rhceph-7-rhel9@sha256:75bd8969ab3f86f2203a1ceb187876f44e54c9ee3b917518c4d696cf6cd88ce3
+    cleanupPolicy:
+      sanitizeDisks: {}
+    continueUpgradeAfterChecksEvenIfNotHealthy: true
+    crashCollector: {}
+    csi:
+      cephfs:
+        kernelMountOptions: ms_mode=prefer-crc
+      readAffinity:
+        enabled: true
+    dashboard: {}
+    dataDirHostPath: /var/lib/rook
+    disruptionManagement:
+      machineDisruptionBudgetNamespace: openshift-machine-api
+      managePodBudgets: true
+    external: {}
+    healthCheck:
+      daemonHealth:
+        mon: {}
+        osd: {}
+        status: {}
+    labels:
+      exporter:
+        rook.io/managedBy: ocs-storagecluster
+      mgr:
+        odf-resource-profile: balanced
+      mon:
+        odf-resource-profile: balanced
+      monitoring:
+        rook.io/managedBy: ocs-storagecluster
+      osd:
+        odf-resource-profile: balanced
+    logCollector:
+      enabled: true
+      maxLogSize: 500Mi
+      periodicity: daily
+    mgr:
+      count: 2
+      modules:
+      - enabled: true
+        name: pg_autoscaler
+      - enabled: true
+        name: balancer
+    mon:
+      count: 3
+    monitoring:
+      enabled: true
+      interval: 30s
+    network:
+      connections:
+        encryption: {}
+        requireMsgr2: true
+      multiClusterService: {}
+    placement:
+      all:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cluster.ocs.openshift.io/openshift-storage
+                operator: Exists
+        tolerations:
+        - effect: NoSchedule
+          key: node.ocs.openshift.io/storage
+          operator: Equal
+          value: "true"
+      arbiter:
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+      mon:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cluster.ocs.openshift.io/openshift-storage
+                operator: Exists
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-mon
+            topologyKey: kubernetes.io/hostname
+    priorityClassNames:
+      mgr: system-node-critical
+      mon: system-node-critical
+      osd: system-node-critical
+    resources:
+      mgr:
+        limits:
+          cpu: "2"
+          memory: 3Gi
+        requests:
+          cpu: "1"
+          memory: 1536Mi
+      mon:
+        limits:
+          cpu: "1"
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+    security:
+      keyRotation:
+        enabled: false
+        schedule: '@weekly'
+      kms: {}
+    storage:
+      flappingRestartIntervalHours: 24
+      storageClassDeviceSets:
+      - count: 9
+        name: ocs-deviceset-lso-volumeset-0
+        placement:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: cluster.ocs.openshift.io/openshift-storage
+                  operator: Exists
+          tolerations:
+          - effect: NoSchedule
+            key: node.ocs.openshift.io/storage
+            operator: Equal
+            value: "true"
+          topologySpreadConstraints:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-osd
+            maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: ScheduleAnyway
+        preparePlacement:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: cluster.ocs.openshift.io/openshift-storage
+                  operator: Exists
+          tolerations:
+          - effect: NoSchedule
+            key: node.ocs.openshift.io/storage
+            operator: Equal
+            value: "true"
+          topologySpreadConstraints:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-osd
+                - rook-ceph-osd-prepare
+            maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: ScheduleAnyway
+        resources:
+          limits:
+            cpu: "2"
+            memory: 5Gi
+          requests:
+            cpu: "2"
+            memory: 5Gi
+        tuneFastDeviceClass: true
+        volumeClaimTemplates:
+        - metadata:
+            annotations:
+              crushDeviceClass: ssd
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: "1"
+            storageClassName: lso-volumeset
+            volumeMode: Block
+      store: {}
+  status:
+    ceph:
+      capacity:
+        bytesAvailable: 965746425856
+        bytesTotal: 966367641600
+        bytesUsed: 621215744
+        lastUpdated: "2025-07-15T14:34:14Z"
+      fsid: 5a14baec-a697-4378-af48-fced444c9183
+      health: HEALTH_OK
+      lastChecked: "2025-07-15T14:34:14Z"
+      versions:
+        mds:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 2
+        mgr:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 2
+        mon:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 3
+        osd:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 9
+        overall:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 17
+        rgw:
+          ceph version 18.2.1-229.el9cp (ef652b206f2487adfc86613646a4cac946f6b4e0) reef (stable): 1
+    conditions:
+    - lastHeartbeatTime: "2025-07-15T14:34:14Z"
+      lastTransitionTime: "2025-07-15T12:15:55Z"
+      message: Cluster created successfully
+      reason: ClusterCreated
+      status: "True"
+      type: Ready
+    message: Cluster created successfully
+    observedGeneration: 2
+    phase: Ready
+    state: Created
+    storage:
+      deviceClasses:
+      - name: ssd
+      osd:
+        storeType:
+          bluestore: 9
+    version:
+      image: registry.redhat.io/rhceph/rhceph-7-rhel9@sha256:75bd8969ab3f86f2203a1ceb187876f44e54c9ee3b917518c4d696cf6cd88ce3
+      version: 18.2.1-229
+- apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    creationTimestamp: "2025-07-15T12:12:29Z"
+    labels:
+      local.storage.openshift.io/owner-name: lso-volumeset
+      local.storage.openshift.io/owner-namespace: openshift-local-storage
+    name: lso-volumeset
+    resourceVersion: "320901"
+    uid: afa3e699-1698-45f9-9615-d88c62cb8a92
+  provisioner: kubernetes.io/no-provisioner
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+- apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      storageclass.kubernetes.io/is-default-class: "true"
+    creationTimestamp: "2024-11-02T15:39:53Z"
+    name: nfs-storage
+    resourceVersion: "28319"
+    uid: ca93b6ad-d5ac-4fb9-b0ac-dde783b457b6
+  parameters:
+    archiveOnDelete: "false"
+  provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+- allowVolumeExpansion: true
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides RWO Filesystem volumes, and RWO and RWX Block volumes
+    creationTimestamp: "2025-07-15T12:16:15Z"
+    name: ocs-storagecluster-ceph-rbd
+    resourceVersion: "326680"
+    uid: 38519e14-bf43-4436-abc8-7a9b6d57dc8d
+  parameters:
+    clusterID: openshift-storage
+    csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+    csi.storage.k8s.io/controller-expand-secret-namespace: openshift-storage
+    csi.storage.k8s.io/fstype: ext4
+    csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+    csi.storage.k8s.io/node-stage-secret-namespace: openshift-storage
+    csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+    csi.storage.k8s.io/provisioner-secret-namespace: openshift-storage
+    imageFeatures: layering,deep-flatten,exclusive-lock,object-map,fast-diff
+    imageFormat: "2"
+    pool: ocs-storagecluster-cephblockpool
+  provisioner: openshift-storage.rbd.csi.ceph.com
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+- allowVolumeExpansion: true
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides RWO and RWX Block volumes suitable for Virtual Machine
+        disks
+      storageclass.kubevirt.io/is-default-virt-class: "true"
+    creationTimestamp: "2025-07-15T12:16:15Z"
+    name: ocs-storagecluster-ceph-rbd-virtualization
+    resourceVersion: "326682"
+    uid: bdfca770-882d-4b70-bb3d-c55827b47d86
+  parameters:
+    clusterID: openshift-storage
+    csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+    csi.storage.k8s.io/controller-expand-secret-namespace: openshift-storage
+    csi.storage.k8s.io/fstype: ext4
+    csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+    csi.storage.k8s.io/node-stage-secret-namespace: openshift-storage
+    csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+    csi.storage.k8s.io/provisioner-secret-namespace: openshift-storage
+    imageFeatures: layering,deep-flatten,exclusive-lock,object-map,fast-diff
+    imageFormat: "2"
+    mapOptions: krbd:rxbounce
+    mounter: rbd
+    pool: ocs-storagecluster-cephblockpool
+  provisioner: openshift-storage.rbd.csi.ceph.com
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+- apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides Object Bucket Claims (OBCs)
+    creationTimestamp: "2025-07-15T12:14:10Z"
+    name: ocs-storagecluster-ceph-rgw
+    resourceVersion: "322377"
+    uid: 2f2fe042-b9c1-4306-9e3f-e2eed67901d2
+  parameters:
+    objectStoreName: ocs-storagecluster-cephobjectstore
+    objectStoreNamespace: openshift-storage
+    region: us-east-1
+  provisioner: openshift-storage.ceph.rook.io/bucket
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+- allowVolumeExpansion: true
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides RWO and RWX Filesystem volumes
+    creationTimestamp: "2025-07-15T12:16:31Z"
+    name: ocs-storagecluster-cephfs
+    resourceVersion: "326939"
+    uid: 95610c7a-2523-4ade-a5d5-77a24e0e2151
+  parameters:
+    clusterID: openshift-storage
+    csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+    csi.storage.k8s.io/controller-expand-secret-namespace: openshift-storage
+    csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+    csi.storage.k8s.io/node-stage-secret-namespace: openshift-storage
+    csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+    csi.storage.k8s.io/provisioner-secret-namespace: openshift-storage
+    fsName: ocs-storagecluster-cephfilesystem
+  provisioner: openshift-storage.cephfs.csi.ceph.com
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker01
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_4a0b933a-6f01-42ce-a500-61167071ff7b
+      storage.openshift.com/device-name: sdb
+    creationTimestamp: "2025-07-15T12:13:33Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker01
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-418f9425
+    resourceVersion: "324798"
+    uid: b0321987-0224-4693-b0c2-19fa988cd372
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-62q564
+      namespace: openshift-storage
+      resourceVersion: "324574"
+      uid: 6144f86a-7ca0-4ef9-97ea-0559609cb226
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_4a0b933a-6f01-42ce-a500-61167071ff7b
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker01
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:37Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker01
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_f0d282dc-db24-4ef9-85c9-623ceb8f7306
+      storage.openshift.com/device-name: sdc
+    creationTimestamp: "2025-07-15T12:13:33Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker01
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-594b4920
+    resourceVersion: "324603"
+    uid: 5a5781b3-503e-4424-bc2d-9119ca9b90c8
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-09ft58
+      namespace: openshift-storage
+      resourceVersion: "324558"
+      uid: 452229eb-0673-40bb-b90c-8695e8e20275
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_f0d282dc-db24-4ef9-85c9-623ceb8f7306
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker01
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:33Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker03
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_b818c5d3-5c0e-4ba0-8def-ecad155ba45b
+      storage.openshift.com/device-name: sdd
+    creationTimestamp: "2025-07-15T12:13:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker03
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-839634a
+    resourceVersion: "324893"
+    uid: 333b9784-1dcf-4de4-83c8-a52a37a363e5
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-87gr6v
+      namespace: openshift-storage
+      resourceVersion: "324589"
+      uid: e634bed7-be91-4ce4-9c9c-c2ab4431623b
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_b818c5d3-5c0e-4ba0-8def-ecad155ba45b
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker03
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:38Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker03
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_e5c3f7af-3491-4144-94a5-ff31a9bd7d13
+      storage.openshift.com/device-name: sdb
+    creationTimestamp: "2025-07-15T12:13:31Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker03
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-9713d859
+    resourceVersion: "324746"
+    uid: eedbb756-20f2-4ba0-a5e4-12bb649ba050
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-5kp5xx
+      namespace: openshift-storage
+      resourceVersion: "324568"
+      uid: b7bffa8d-e855-4e65-ba75-52d4e68ba845
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_e5c3f7af-3491-4144-94a5-ff31a9bd7d13
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker03
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:36Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker03
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_00328075-6c24-44b6-8323-24325edb6550
+      storage.openshift.com/device-name: sdc
+    creationTimestamp: "2025-07-15T12:13:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker03
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-ac3daf6e
+    resourceVersion: "324638"
+    uid: efb308b4-bc71-4ca0-86b2-a309edd232d5
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-2zk7bf
+      namespace: openshift-storage
+      resourceVersion: "324561"
+      uid: a0ad0409-4c44-4c5a-b219-821ff3f8d0a7
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_00328075-6c24-44b6-8323-24325edb6550
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker03
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:34Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker02
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_33a598bb-c808-4926-93db-99be5d1ed36f
+      storage.openshift.com/device-name: sdd
+    creationTimestamp: "2025-07-15T12:13:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker02
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-bd5c1286
+    resourceVersion: "324626"
+    uid: db4f9252-51bd-4752-901f-7b4ce622e059
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-1m4hsv
+      namespace: openshift-storage
+      resourceVersion: "324559"
+      uid: 3c1c8c7a-02c4-438f-8d18-9c3ed82f7b60
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_33a598bb-c808-4926-93db-99be5d1ed36f
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker02
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:34Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker02
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_7328f3c2-4ba8-4335-8fa8-b5c1370296cc
+      storage.openshift.com/device-name: sdc
+    creationTimestamp: "2025-07-15T12:13:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker02
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-d894f3cf
+    resourceVersion: "324848"
+    uid: 713658cd-97b1-4a41-a7f5-0bbf4546cc17
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-7ctnkn
+      namespace: openshift-storage
+      resourceVersion: "324580"
+      uid: f339cfc1-c2d9-47df-8126-522a2eb9f262
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_7328f3c2-4ba8-4335-8fa8-b5c1370296cc
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker02
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:38Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker01
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_234b834b-3dfc-4528-ae30-b28ad75b1f0c
+      storage.openshift.com/device-name: sdd
+    creationTimestamp: "2025-07-15T12:13:33Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker01
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-f27be494
+    resourceVersion: "324655"
+    uid: e8ff93a6-4dfe-4362-ace4-bb7fd4252e3c
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-34mccx
+      namespace: openshift-storage
+      resourceVersion: "324563"
+      uid: 9a90fafa-e380-4e0c-a4e7-4cad803f9ee3
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_234b834b-3dfc-4528-ae30-b28ad75b1f0c
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker01
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:34Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+      pv.kubernetes.io/provisioned-by: local-volume-provisioner-worker02
+      storage.openshift.com/device-id: scsi-0QEMU_QEMU_HARDDISK_83df7da1-b420-47ec-8c1c-a30c7c84d0dc
+      storage.openshift.com/device-name: sdb
+    creationTimestamp: "2025-07-15T12:13:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: worker02
+      storage.openshift.com/owner-kind: LocalVolumeSet
+      storage.openshift.com/owner-name: lso-volumeset
+      storage.openshift.com/owner-namespace: openshift-local-storage
+    name: local-pv-fdfa15c4
+    resourceVersion: "324695"
+    uid: 1260f2ca-260c-4bd8-b5bb-c834fdb110be
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: ocs-deviceset-lso-volumeset-0-data-4vdwrs
+      namespace: openshift-storage
+      resourceVersion: "324566"
+      uid: f7d33e6b-f142-415e-8f9a-9eb0f13a5feb
+    local:
+      path: /mnt/local-storage/lso-volumeset/scsi-0QEMU_QEMU_HARDDISK_83df7da1-b420-47ec-8c1c-a30c7c84d0dc
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker02
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lso-volumeset
+    volumeMode: Block
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:15:35Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:21Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-13432699-8b0c-4233-b57b-503091893249
+    resourceVersion: "173463"
+    uid: 66d7cf06-1b77-4168-967a-d06e3fc6c695
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: centos-stream9-d8f7af81e0a2
+      namespace: openshift-virtualization-os-images
+      resourceVersion: "173449"
+      uid: 13432699-8b0c-4233-b57b-503091893249
+    nfs:
+      path: /exports-ocp4/openshift-virtualization-os-images-centos-stream9-d8f7af81e0a2-pvc-13432699-8b0c-4233-b57b-503091893249
+      server: 192.168.50.254
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-11-07T09:05:21Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: openshift-storage.rbd.csi.ceph.com
+      volume.kubernetes.io/provisioner-deletion-secret-name: rook-csi-rbd-provisioner
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: openshift-storage
+    creationTimestamp: "2025-07-15T12:16:32Z"
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    name: pvc-4aa7df7e-514d-40e0-aa43-b988f6600b9a
+    resourceVersion: "327050"
+    uid: 5332c753-7ad8-44bd-9ce1-662f7cd0bb83
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 50Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: db-noobaa-db-pg-0
+      namespace: openshift-storage
+      resourceVersion: "326999"
+      uid: 4aa7df7e-514d-40e0-aa43-b988f6600b9a
+    csi:
+      controllerExpandSecretRef:
+        name: rook-csi-rbd-provisioner
+        namespace: openshift-storage
+      driver: openshift-storage.rbd.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: rook-csi-rbd-node
+        namespace: openshift-storage
+      volumeAttributes:
+        clusterID: openshift-storage
+        imageFeatures: layering,deep-flatten,exclusive-lock,object-map,fast-diff
+        imageFormat: "2"
+        imageName: csi-vol-0955362a-9126-46e1-be4d-b16efd09a449
+        journalPool: ocs-storagecluster-cephblockpool
+        pool: ocs-storagecluster-cephblockpool
+        storage.kubernetes.io/csiProvisionerIdentity: 1752581654039-7579-openshift-storage.rbd.csi.ceph.com
+      volumeHandle: 0001-0011-openshift-storage-0000000000000001-0955362a-9126-46e1-be4d-b16efd09a449
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: ocs-storagecluster-ceph-rbd
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-07-15T12:16:32Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:21Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-4bb74657-42ca-47de-a424-038c558277fa
+    resourceVersion: "173475"
+    uid: 049a1940-5662-4337-ad92-6d553422b979
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: fedora-b476c72dcf47
+      namespace: openshift-virtualization-os-images
+      resourceVersion: "173448"
+      uid: 4bb74657-42ca-47de-a424-038c558277fa
+    nfs:
+      path: /exports-ocp4/openshift-virtualization-os-images-fedora-b476c72dcf47-pvc-4bb74657-42ca-47de-a424-038c558277fa
+      server: 192.168.50.254
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-11-07T09:05:21Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:11Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-79eb7e50-7038-4bab-a938-e044e9707292
+    resourceVersion: "173215"
+    uid: fa801f31-9035-48ad-b236-7cf7394971a7
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: centos-stream8-45036e2a965a
+      namespace: openshift-virtualization-os-images
+      resourceVersion: "173203"
+      uid: 79eb7e50-7038-4bab-a938-e044e9707292
+    nfs:
+      path: /exports-ocp4/openshift-virtualization-os-images-centos-stream8-45036e2a965a-pvc-79eb7e50-7038-4bab-a938-e044e9707292
+      server: 192.168.50.254
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-11-07T09:05:11Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-02T15:39:56Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-9799e59a-544a-4cc9-a64b-e46e16e68b98
+    resourceVersion: "28352"
+    uid: 683825df-d9ab-4097-8d17-231db5c69eaf
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 20Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: registry-claim
+      namespace: openshift-image-registry
+      resourceVersion: "28329"
+      uid: 9799e59a-544a-4cc9-a64b-e46e16e68b98
+    nfs:
+      path: /exports-ocp4/openshift-image-registry-registry-claim-pvc-9799e59a-544a-4cc9-a64b-e46e16e68b98
+      server: 192.168.50.254
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-11-02T15:39:56Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:21Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-f1c8014b-0df8-4e49-9d0b-4a386d75130e
+    resourceVersion: "173456"
+    uid: 0003440d-61e3-4615-bd06-89641fc10de0
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: centos7-02aa45fbcbad
+      namespace: openshift-virtualization-os-images
+      resourceVersion: "173447"
+      uid: f1c8014b-0df8-4e49-9d0b-4a386d75130e
+    nfs:
+      path: /exports-ocp4/openshift-virtualization-os-images-centos7-02aa45fbcbad-pvc-f1c8014b-0df8-4e49-9d0b-4a386d75130e
+      server: 192.168.50.254
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-11-07T09:05:21Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+      volume.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-02T15:39:55Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: registry-claim
+    namespace: openshift-image-registry
+    resourceVersion: "28354"
+    uid: 9799e59a-544a-4cc9-a64b-e46e16e68b98
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 20Gi
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+    volumeName: pvc-9799e59a-544a-4cc9-a64b-e46e16e68b98
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 20Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: openshift-storage.rbd.csi.ceph.com
+      volume.kubernetes.io/storage-provisioner: openshift-storage.rbd.csi.ceph.com
+    creationTimestamp: "2025-07-15T12:16:31Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: noobaa
+      noobaa-db: postgres
+    name: db-noobaa-db-pg-0
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: noobaa.io/v1alpha1
+      controller: true
+      kind: NooBaa
+      name: noobaa
+      uid: a2b28bce-68ad-4f5e-b861-29a08b59f93b
+    resourceVersion: "327054"
+    uid: 4aa7df7e-514d-40e0-aa43-b988f6600b9a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 50Gi
+    storageClassName: ocs-storagecluster-ceph-rbd
+    volumeMode: Filesystem
+    volumeName: pvc-4aa7df7e-514d-40e0-aa43-b988f6600b9a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 50Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-0
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-0
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "0"
+    name: ocs-deviceset-lso-volumeset-0-data-09ft58
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324605"
+    uid: 452229eb-0673-40bb-b90c-8695e8e20275
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-594b4920
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-1
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-1
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "1"
+    name: ocs-deviceset-lso-volumeset-0-data-1m4hsv
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324628"
+    uid: 3c1c8c7a-02c4-438f-8d18-9c3ed82f7b60
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-bd5c1286
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-2
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-2
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "2"
+    name: ocs-deviceset-lso-volumeset-0-data-2zk7bf
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324641"
+    uid: a0ad0409-4c44-4c5a-b219-821ff3f8d0a7
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-ac3daf6e
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-3
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-3
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "3"
+    name: ocs-deviceset-lso-volumeset-0-data-34mccx
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324658"
+    uid: 9a90fafa-e380-4e0c-a4e7-4cad803f9ee3
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-f27be494
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-4
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-4
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "4"
+    name: ocs-deviceset-lso-volumeset-0-data-4vdwrs
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324698"
+    uid: f7d33e6b-f142-415e-8f9a-9eb0f13a5feb
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-fdfa15c4
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-5
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-5
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "5"
+    name: ocs-deviceset-lso-volumeset-0-data-5kp5xx
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324750"
+    uid: b7bffa8d-e855-4e65-ba75-52d4e68ba845
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-9713d859
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-6
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-6
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "6"
+    name: ocs-deviceset-lso-volumeset-0-data-62q564
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324804"
+    uid: 6144f86a-7ca0-4ef9-97ea-0559609cb226
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-418f9425
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:32Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-7
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-7
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "7"
+    name: ocs-deviceset-lso-volumeset-0-data-7ctnkn
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324852"
+    uid: f339cfc1-c2d9-47df-8126-522a2eb9f262
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-d894f3cf
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      crushDeviceClass: ssd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-07-15T12:15:33Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    generateName: ocs-deviceset-lso-volumeset-0-data-8
+    labels:
+      ceph.rook.io/DeviceSet: ocs-deviceset-lso-volumeset-0
+      ceph.rook.io/DeviceSetPVCId: ocs-deviceset-lso-volumeset-0-data-8
+      ceph.rook.io/cephImageAtCreation: ""
+      ceph.rook.io/rookImageAtCreation: ""
+      ceph.rook.io/setIndex: "8"
+    name: ocs-deviceset-lso-volumeset-0-data-87gr6v
+    namespace: openshift-storage
+    ownerReferences:
+    - apiVersion: ceph.rook.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CephCluster
+      name: ocs-storagecluster-cephcluster
+      uid: b9d3ebd2-8818-42ea-ade7-e00d439ee139
+    resourceVersion: "324895"
+    uid: e634bed7-be91-4ce4-9c9c-c2ab4431623b
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: "1"
+    storageClassName: lso-volumeset
+    volumeMode: Block
+    volumeName: local-pv-839634a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/createdForDataVolume: 3729b07a-a642-4b75-b94b-d306a49446a3
+      cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+      cdi.kubevirt.io/storage.condition.running: "false"
+      cdi.kubevirt.io/storage.condition.running.message: Import Complete
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.import.endpoint: docker://quay.io/containerdisks/centos-stream@sha256:45036e2a965a75a6ec6fe5ac76efece99382a7df6ea0d8b3bd66acdbefb47324
+      cdi.kubevirt.io/storage.import.importPodName: importer-centos-stream8-45036e2a965a
+      cdi.kubevirt.io/storage.import.lastUseTime: "2024-11-07T09:14:57.611124678Z"
+      cdi.kubevirt.io/storage.import.registryImportMethod: node
+      cdi.kubevirt.io/storage.import.source: registry
+      cdi.kubevirt.io/storage.pod.phase: Succeeded
+      cdi.kubevirt.io/storage.pod.restarts: "0"
+      cdi.kubevirt.io/storage.preallocation.requested: "false"
+      cdi.kubevirt.io/storage.usePopulator: "false"
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+      volume.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:11Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      alerts.k8s.io/KubePersistentVolumeFillingUp: disabled
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.16.1
+      cdi.kubevirt.io/dataImportCron: centos-stream8-image-cron
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: centos.stream8
+    name: centos-stream8-45036e2a965a
+    namespace: openshift-virtualization-os-images
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: centos-stream8-45036e2a965a
+      uid: 3729b07a-a642-4b75-b94b-d306a49446a3
+    resourceVersion: "183234"
+    uid: 79eb7e50-7038-4bab-a938-e044e9707292
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: "34087042032"
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+    volumeName: pvc-79eb7e50-7038-4bab-a938-e044e9707292
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/createdForDataVolume: d084f1cb-d8d7-4c81-b5a9-901617201c40
+      cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+      cdi.kubevirt.io/storage.condition.running: "false"
+      cdi.kubevirt.io/storage.condition.running.message: Import Complete
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.import.endpoint: docker://quay.io/containerdisks/centos-stream@sha256:d8f7af81e0a2df1b976c16a3c104f4618402b1705257d24f7ea0550e75fa10e7
+      cdi.kubevirt.io/storage.import.importPodName: importer-centos-stream9-d8f7af81e0a2
+      cdi.kubevirt.io/storage.import.lastUseTime: "2024-11-07T09:14:57.53410093Z"
+      cdi.kubevirt.io/storage.import.registryImportMethod: node
+      cdi.kubevirt.io/storage.import.source: registry
+      cdi.kubevirt.io/storage.pod.phase: Succeeded
+      cdi.kubevirt.io/storage.pod.restarts: "0"
+      cdi.kubevirt.io/storage.preallocation.requested: "false"
+      cdi.kubevirt.io/storage.usePopulator: "false"
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+      volume.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:10Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      alerts.k8s.io/KubePersistentVolumeFillingUp: disabled
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.16.1
+      cdi.kubevirt.io/dataImportCron: centos-stream9-image-cron
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: centos.stream9
+      kubevirt.io/dynamic-credentials-support: "true"
+    name: centos-stream9-d8f7af81e0a2
+    namespace: openshift-virtualization-os-images
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: centos-stream9-d8f7af81e0a2
+      uid: d084f1cb-d8d7-4c81-b5a9-901617201c40
+    resourceVersion: "183231"
+    uid: 13432699-8b0c-4233-b57b-503091893249
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: "34087042032"
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+    volumeName: pvc-13432699-8b0c-4233-b57b-503091893249
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/createdForDataVolume: 11cae59e-8aca-46ae-a8c5-eacfd62c0a27
+      cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+      cdi.kubevirt.io/storage.condition.running: "false"
+      cdi.kubevirt.io/storage.condition.running.message: Import Complete
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.import.endpoint: docker://quay.io/containerdisks/centos@sha256:02aa45fbcbadbaf2a4c483dce82c75da013da2d0e1ae96308de0cffedf4cb60c
+      cdi.kubevirt.io/storage.import.importPodName: importer-centos7-02aa45fbcbad
+      cdi.kubevirt.io/storage.import.lastUseTime: "2024-11-07T09:14:57.571513978Z"
+      cdi.kubevirt.io/storage.import.registryImportMethod: node
+      cdi.kubevirt.io/storage.import.source: registry
+      cdi.kubevirt.io/storage.pod.phase: Succeeded
+      cdi.kubevirt.io/storage.pod.restarts: "0"
+      cdi.kubevirt.io/storage.preallocation.requested: "false"
+      cdi.kubevirt.io/storage.usePopulator: "false"
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+      volume.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:10Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      alerts.k8s.io/KubePersistentVolumeFillingUp: disabled
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.16.1
+      cdi.kubevirt.io/dataImportCron: centos-7-image-cron
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: centos.7
+    name: centos7-02aa45fbcbad
+    namespace: openshift-virtualization-os-images
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: centos7-02aa45fbcbad
+      uid: 11cae59e-8aca-46ae-a8c5-eacfd62c0a27
+    resourceVersion: "183232"
+    uid: f1c8014b-0df8-4e49-9d0b-4a386d75130e
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: "34087042032"
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+    volumeName: pvc-f1c8014b-0df8-4e49-9d0b-4a386d75130e
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/createdForDataVolume: 19b9f8dd-d8dc-4592-9fff-66963a23fcad
+      cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+      cdi.kubevirt.io/storage.condition.running: "false"
+      cdi.kubevirt.io/storage.condition.running.message: Import Complete
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.import.endpoint: docker://quay.io/containerdisks/fedora@sha256:b476c72dcf47f1bc6a9908f3146146d8e5216557ff1da03dc6a143f3f684cd50
+      cdi.kubevirt.io/storage.import.importPodName: importer-fedora-b476c72dcf47
+      cdi.kubevirt.io/storage.import.lastUseTime: "2024-11-07T09:14:57.625880687Z"
+      cdi.kubevirt.io/storage.import.registryImportMethod: node
+      cdi.kubevirt.io/storage.import.source: registry
+      cdi.kubevirt.io/storage.pod.phase: Succeeded
+      cdi.kubevirt.io/storage.pod.restarts: "0"
+      cdi.kubevirt.io/storage.preallocation.requested: "false"
+      cdi.kubevirt.io/storage.usePopulator: "false"
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+      volume.kubernetes.io/storage-provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
+    creationTimestamp: "2024-11-07T09:05:10Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      alerts.k8s.io/KubePersistentVolumeFillingUp: disabled
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.16.1
+      cdi.kubevirt.io/dataImportCron: fedora-image-cron
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: fedora
+      kubevirt.io/dynamic-credentials-support: "true"
+    name: fedora-b476c72dcf47
+    namespace: openshift-virtualization-os-images
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: fedora-b476c72dcf47
+      uid: 19b9f8dd-d8dc-4592-9fff-66963a23fcad
+    resourceVersion: "183235"
+    uid: 4bb74657-42ca-47de-a424-038c558277fa
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: "34087042032"
+    storageClassName: nfs-storage
+    volumeMode: Filesystem
+    volumeName: pvc-4bb74657-42ca-47de-a424-038c558277fa
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: "34087042032"
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""

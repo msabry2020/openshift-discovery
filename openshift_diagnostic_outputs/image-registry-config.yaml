@@ -1,0 +1,97 @@
+apiVersion: imageregistry.operator.openshift.io/v1
+kind: Config
+metadata:
+  creationTimestamp: "2024-11-02T15:27:21Z"
+  finalizers:
+  - imageregistry.operator.openshift.io/finalizer
+  generation: 4
+  name: cluster
+  resourceVersion: "269416"
+  uid: 4e11c6b3-599e-490b-965d-baaf6ea32af9
+spec:
+  httpSecret: 4d72a1749c3a51d2b35f29ce143e31fb6b3916b8c7ea0c49641980e320a58ca10645f3cbe98a19056525e1f768ebb6223db5d3389efdeb70fb282bb1a0812e9f
+  logLevel: Normal
+  managementState: Managed
+  observedConfig: null
+  operatorLogLevel: Normal
+  proxy: {}
+  replicas: 1
+  requests:
+    read:
+      maxWaitInQueue: 0s
+    write:
+      maxWaitInQueue: 0s
+  rolloutStrategy: RollingUpdate
+  storage:
+    managementState: Unmanaged
+    pvc:
+      claim: registry-claim
+  unsupportedConfigOverrides: null
+status:
+  conditions:
+  - lastTransitionTime: "2024-11-02T15:27:21Z"
+    reason: AsExpected
+    status: "False"
+    type: ImageRegistryCertificatesControllerDegraded
+  - lastTransitionTime: "2024-11-02T15:27:21Z"
+    reason: AsExpected
+    status: "False"
+    type: AzureStackCloudControllerDegraded
+  - lastTransitionTime: "2024-11-02T15:27:21Z"
+    reason: AsExpected
+    status: "False"
+    type: ImageConfigControllerDegraded
+  - lastTransitionTime: "2024-11-02T15:27:26Z"
+    message: The daemon set node-ca has available replicas
+    reason: AsExpected
+    status: "True"
+    type: NodeCADaemonAvailable
+  - lastTransitionTime: "2025-07-15T11:25:21Z"
+    message: The daemon set node-ca is deployed
+    reason: AsExpected
+    status: "False"
+    type: NodeCADaemonProgressing
+  - lastTransitionTime: "2024-11-02T15:27:21Z"
+    reason: AsExpected
+    status: "False"
+    type: NodeCADaemonControllerDegraded
+  - lastTransitionTime: "2025-07-15T11:28:24Z"
+    message: The registry is ready
+    reason: Ready
+    status: "False"
+    type: Progressing
+  - lastTransitionTime: "2025-07-15T11:28:24Z"
+    message: The registry is ready
+    reason: Ready
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2024-11-02T15:27:22Z"
+    status: "False"
+    type: Degraded
+  - lastTransitionTime: "2024-11-02T15:39:57Z"
+    status: "False"
+    type: Removed
+  - lastTransitionTime: "2024-11-02T15:39:56Z"
+    reason: PVC Exists
+    status: "True"
+    type: StorageExists
+  generations:
+  - group: apps
+    hash: ""
+    lastGeneration: 1
+    name: node-ca
+    namespace: openshift-image-registry
+    resource: daemonsets
+  - group: apps
+    hash: ""
+    lastGeneration: 3
+    name: image-registry
+    namespace: openshift-image-registry
+    resource: deployments
+  observedGeneration: 4
+  readyReplicas: 1
+  storage:
+    managementState: Unmanaged
+    pvc:
+      claim: registry-claim
+  storageManaged: false

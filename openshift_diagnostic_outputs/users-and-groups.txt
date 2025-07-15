@@ -1,0 +1,3 @@
+NAME                               UID                                    FULL NAME   IDENTITIES
+user.user.openshift.io/admin       722c0b41-bb01-42a6-bf00-99eef35f508b               htpasswd_provider:admin
+user.user.openshift.io/developer   f8ceeeed-fda1-4681-8703-1c1bb7efc5aa               htpasswd_provider:developer
