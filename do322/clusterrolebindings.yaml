@@ -1,0 +1,4361 @@
+apiVersion: v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:52Z"
+    labels:
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: alertmanager-main
+    resourceVersion: "22619"
+    uid: 01b1da5c-d44d-4fdc-be63-a6e423a976cc
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: alertmanager-main
+  subjects:
+  - kind: ServiceAccount
+    name: alertmanager-main
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: basic-users
+    resourceVersion: "11023"
+    uid: c3678666-3571-4249-9cde-7028ac39623d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: basic-user
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CloudControllerManager
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:23Z"
+    name: cloud-controller-manager
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2762"
+    uid: f84a5846-264a-4036-adb2-9eaf3e3cc051
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cloud-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: cloud-controller-manager
+    namespace: openshift-cloud-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CloudCredential
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:30Z"
+    name: cloud-credential-operator-rolebinding
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1041"
+    uid: ee82d182-b176-4ffc-b9ef-5a5c8846409a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cloud-credential-operator-role
+  subjects:
+  - kind: ServiceAccount
+    name: cloud-credential-operator
+    namespace: openshift-cloud-credential-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CloudControllerManager
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:24Z"
+    name: cloud-node-manager
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2775"
+    uid: af12c02f-30e8-4d31-8b0d-d9d548b3092e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cloud-node-manager
+  subjects:
+  - kind: ServiceAccount
+    name: cloud-node-manager
+    namespace: openshift-cloud-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: cluster-admin
+    resourceVersion: "151"
+    uid: f14f6fd3-87af-4994-86f0-5176ce3cf39a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:masters
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: cluster-admins
+    resourceVersion: "11021"
+    uid: 80b59b94-b30e-4001-a9bf-a6469f04e008
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:cluster-admins
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:admin
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:19Z"
+    labels:
+      k8s-addon: cluster-autoscaler.addons.k8s.io
+      k8s-app: cluster-autoscaler
+    name: cluster-autoscaler
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2672"
+    uid: e4966a91-bfb6-4327-8609-75012db140b4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-autoscaler
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-autoscaler
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:14Z"
+    name: cluster-autoscaler-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2575"
+    uid: 4285ffa0-175d-44f7-89b1-7290d6ee7158
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-autoscaler-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-autoscaler-operator
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: baremetal
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:56Z"
+    name: cluster-baremetal-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2332"
+    uid: f0f89d35-4f28-4baf-9c9f-202fdd209a88
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-baremetal-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-baremetal-operator
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:49Z"
+    name: cluster-monitoring-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1900"
+    uid: a8aa4bfb-cc45-45f4-b65a-2cd43b0433be
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-monitoring-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-monitoring-operator
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:37Z"
+    name: cluster-network-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1336"
+    uid: 6210ac32-0e87-4886-87ec-a876efbafd59
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-network-operator
+    namespace: openshift-network-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: NodeTuning
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:48Z"
+    name: cluster-node-tuning-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1877"
+    uid: 8e319c76-95d8-4ba6-9e4c-c73130e857ca
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-node-tuning-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-node-tuning-operator
+    namespace: openshift-cluster-node-tuning-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: NodeTuning
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:50Z"
+    name: cluster-node-tuning:tuned
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1958"
+    uid: 8beb150a-1660-4786-a681-3b0070c4b34f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-node-tuning:tuned
+  subjects:
+  - kind: ServiceAccount
+    name: tuned
+    namespace: openshift-cluster-node-tuning-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: cluster-readers
+    resourceVersion: "11022"
+    uid: 85e8cfb3-105c-4dc3-9ef2-a0a65d8e21e8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-reader
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:cluster-readers
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: openshift-samples
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:51Z"
+    name: cluster-samples-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1964"
+    uid: 2603f769-6730-4870-8a79-aaca63334d02
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-samples-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-samples-operator
+    namespace: openshift-cluster-samples-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: openshift-samples
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:42Z"
+    name: cluster-samples-operator-imageconfig-reader
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1652"
+    uid: cbc68043-38c4-4096-b9d9-d388b57e5ac8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-samples-operator-imageconfig-reader
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-samples-operator
+    namespace: openshift-cluster-samples-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: openshift-samples
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:45Z"
+    name: cluster-samples-operator-proxy-reader
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1787"
+    uid: 0b83ad34-570b-46b0-9e92-a32e0adf116f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-samples-operator-proxy-reader
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-samples-operator
+    namespace: openshift-cluster-samples-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: cluster-status-binding
+    resourceVersion: "11027"
+    uid: 5f4f5df1-f9ca-447f-a794-3cde0dc2251e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-status
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Storage
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:56Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: cluster-storage-operator-role
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2334"
+    uid: 2c1cc775-7c4b-44c3-b0d5-43c5fc093fb6
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-storage-operator
+    namespace: openshift-cluster-storage-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/self-managed-high-availability: "true"
+      kubernetes.io/description: Grant the cluster-version operator permission to
+        perform cluster-admin actions while managing the OpenShift core.
+    creationTimestamp: "2025-06-18T10:36:07Z"
+    name: cluster-version-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2573"
+    uid: be33c05d-1fc6-4a03-a803-41996843f362
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: openshift-cluster-version
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:48:05Z"
+    name: console
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15625"
+    uid: b3ba4140-c522-45b0-bde2-82750633332a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: console
+  subjects:
+  - kind: ServiceAccount
+    name: console
+    namespace: openshift-console
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:48:05Z"
+    name: console-auth-delegator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15627"
+    uid: 19a90e49-85c3-43b9-99f2-f29c589e090d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - kind: ServiceAccount
+    name: console
+    namespace: openshift-console
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:48:04Z"
+    name: console-extensions-reader
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15622"
+    uid: c2899337-b046-4211-bf92-e5a9a428f487
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: console-extensions-reader
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:48:04Z"
+    name: console-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15621"
+    uid: 5a0ffd5d-9a17-4cac-859e-169e2f874404
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: console-operator
+  subjects:
+  - kind: ServiceAccount
+    name: console-operator
+    namespace: openshift-console-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:48:04Z"
+    name: console-operator-auth-delegator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15624"
+    uid: 03bea7fe-9558-49cf-8c61-a19220efe594
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - kind: ServiceAccount
+    name: console-operator
+    namespace: openshift-console-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: MachineAPI
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:38:13Z"
+    name: control-plane-machine-set-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2570"
+    uid: 18e1a24c-207e-44a1-8cc6-dcd7c5c35c0a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: control-plane-machine-set-operator
+  subjects:
+  - kind: ServiceAccount
+    name: control-plane-machine-set-operator
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:49Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: csi-snapshot-controller-operator-clusterrole
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1909"
+    uid: 42089d6c-7f95-4683-9e6f-02a1ef3a59fb
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: csi-snapshot-controller-operator-clusterrole
+  subjects:
+  - kind: ServiceAccount
+    name: csi-snapshot-controller-operator
+    namespace: openshift-cluster-storage-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CSISnapshot
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:50Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: csi-snapshot-controller-runner-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1934"
+    uid: 07d7c17b-84bd-47dc-9788-74e6bcf935b6
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-csi-snapshot-controller-runner
+  subjects:
+  - kind: ServiceAccount
+    name: csi-snapshot-controller-operator
+    namespace: openshift-cluster-storage-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:46Z"
+    name: csi-snapshot-webhook-clusterrolebinding
+    resourceVersion: "5212"
+    uid: 686095d2-bdd6-4e44-91bd-7014aff02eec
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: csi-snapshot-webhook-clusterrole
+  subjects:
+  - kind: ServiceAccount
+    name: csi-snapshot-webhook
+    namespace: openshift-cluster-storage-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:51Z"
+    name: custom-account-openshift-machine-config-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1966"
+    uid: bc82e502-f77c-4a59-9e23-683a1602b9e1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: machine-config-operator
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: ImageRegistry
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:50Z"
+    name: default-account-cluster-image-registry-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1939"
+    uid: 92e90f0e-64b5-459f-a2fc-e16abae936c1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-image-registry-operator
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-image-registry-operator
+    namespace: openshift-image-registry
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:01Z"
+    name: dns-monitoring
+    resourceVersion: "8837"
+    uid: 8c139498-5010-4204-b051-e67a97e5a0fe
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: dns-monitoring
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Console
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+      release.openshift.io/create-only: "true"
+    creationTimestamp: "2025-06-18T10:48:05Z"
+    name: helm-chartrepos-view
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "15626"
+    uid: b7d0f2a0-4b21-4cff-8aa0-9969490549c1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: helm-chartrepos-viewer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Insights
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:47Z"
+    name: insights-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1837"
+    uid: 407474e1-81f5-42bd-9f2d-70515d36e0b8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: insights-operator
+  subjects:
+  - kind: ServiceAccount
+    name: operator
+    namespace: openshift-insights
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Insights
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:30Z"
+    name: insights-operator-auth
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1006"
+    uid: 8185a215-ff25-4c44-8fab-8c4c33bfaffc
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - kind: ServiceAccount
+    name: operator
+    namespace: openshift-insights
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Insights
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:49Z"
+    name: insights-operator-gather
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1899"
+    uid: 2acb1c41-d041-4ba9-a4e5-203b52ff2f10
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: insights-operator-gather
+  subjects:
+  - kind: ServiceAccount
+    name: gather
+    namespace: openshift-insights
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Insights
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:49Z"
+    name: insights-operator-gather-reader
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1927"
+    uid: f28be4a0-d6f2-46cf-a61a-c362a070756e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-reader
+  subjects:
+  - kind: ServiceAccount
+    name: gather
+    namespace: openshift-insights
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:36:57Z"
+    name: kube-apiserver
+    resourceVersion: "526"
+    uid: d9d179d2-755c-47b2-aedd-5e0c10207c98
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: kube-apiserver
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: kube-apiserver
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:50Z"
+    labels:
+      app.kubernetes.io/component: exporter
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: kube-state-metrics
+      app.kubernetes.io/part-of: openshift-monitoring
+      app.kubernetes.io/version: 2.13.0
+    name: kube-state-metrics
+    resourceVersion: "22438"
+    uid: b390a3af-95f5-4a23-b1ba-462c6730c419
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: kube-state-metrics
+  subjects:
+  - kind: ServiceAccount
+    name: kube-state-metrics
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: MachineAPI
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:57Z"
+    name: machine-api-controllers
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2389"
+    uid: 09f99324-fe4c-4b01-9410-46b6fb878c4c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-api-controllers
+  subjects:
+  - kind: ServiceAccount
+    name: machine-api-controllers
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      exclude.release.openshift.io/internal-openshift-hosted: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:58Z"
+    name: machine-api-controllers-baremetal
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2432"
+    uid: 35596064-7be5-4f16-9ec6-f5b1ba489247
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-api-controllers-metal3-remediation
+  subjects:
+  - kind: ServiceAccount
+    name: machine-api-controllers
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: MachineAPI
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:58Z"
+    name: machine-api-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2408"
+    uid: 00a3833f-88c9-4a39-aa19-7b13e7cd6c50
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-api-operator
+  subjects:
+  - kind: ServiceAccount
+    name: machine-api-operator
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: MachineAPI
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:57Z"
+    name: machine-api-operator-ext-remediation
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2387"
+    uid: 1c0331a1-1eae-4cbc-b991-f4c7410ceb24
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-api-operator-ext-remediation
+  subjects:
+  - kind: ServiceAccount
+    name: machine-api-controllers
+    namespace: openshift-machine-api
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:58Z"
+    name: machine-config-controller
+    resourceVersion: "8610"
+    uid: c49b841c-78b2-42ff-9d46-f76c06095be7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-config-controller
+  subjects:
+  - kind: ServiceAccount
+    name: machine-config-controller
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:34Z"
+    name: machine-config-daemon
+    resourceVersion: "7888"
+    uid: f7e161b3-387a-4aa3-a687-4a51a1b63478
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-config-daemon
+  subjects:
+  - kind: ServiceAccount
+    name: machine-config-daemon
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:04Z"
+    name: machine-config-server
+    resourceVersion: "9079"
+    uid: 6a1ccab5-74bc-4e6e-a3e7-9e0342631d63
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-config-server
+  subjects:
+  - kind: ServiceAccount
+    name: machine-config-server
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:11Z"
+    name: machine-os-builder
+    resourceVersion: "9376"
+    uid: 2e02421b-585c-4b0e-8fc4-2b09f9b6ef16
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: machine-os-builder
+  subjects:
+  - kind: ServiceAccount
+    name: machine-os-builder
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:11Z"
+    name: machine-os-builder-anyuid
+    resourceVersion: "9383"
+    uid: b3afb32c-80da-4a78-b430-7c897a1848a3
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:scc:anyuid
+  subjects:
+  - kind: ServiceAccount
+    name: machine-os-builder
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: marketplace
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:36Z"
+    name: marketplace-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1300"
+    uid: aa774ad3-3846-4e42-a309-abc156fb2a39
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: marketplace-operator
+  subjects:
+  - kind: ServiceAccount
+    name: marketplace-operator
+    namespace: openshift-marketplace
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:27Z"
+    name: metrics-daemon-sa-rolebinding
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3469"
+    uid: 1c0dd82c-6bf8-40a5-b38b-d4197bfd6395
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: metrics-daemon-role
+  subjects:
+  - kind: ServiceAccount
+    name: metrics-daemon-sa
+    namespace: openshift-multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:52Z"
+    labels:
+      app.kubernetes.io/component: metrics-server
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: auth-delegator
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: metrics-server:system:auth-delegator
+    resourceVersion: "22624"
+    uid: ff6e767f-8873-41c5-9b65-3542bd83c17a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - kind: ServiceAccount
+    name: metrics-server
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:28Z"
+    name: multus-admission-controller-webhook
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3529"
+    uid: 8c0db98f-1cc2-449a-8702-3100a28a0a06
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: multus-admission-controller-webhook
+  subjects:
+  - kind: ServiceAccount
+    name: multus-ac
+    namespace: openshift-multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:24Z"
+    name: multus-ancillary-tools
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3371"
+    uid: 7bd9a75f-3f4a-4f3e-a661-f404d3db11fb
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: multus-ancillary-tools
+  subjects:
+  - kind: ServiceAccount
+    name: multus-ancillary-tools
+    namespace: openshift-multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:24Z"
+    name: multus-cluster-readers
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3372"
+    uid: fef08582-d4ac-412c-a9e0-7b604b2e22ae
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: multus-ancillary-tools
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:cluster-readers
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:23Z"
+    name: multus-group
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3368"
+    uid: 8c0d9d69-ec71-4391-9e1f-5f7bc4ab17d4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: multus
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:23Z"
+    name: multus-transient
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3367"
+    uid: 1bb2dc6d-1f28-49c1-be9a-c2e9d3af8e05
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: multus-ancillary-tools
+  subjects:
+  - kind: ServiceAccount
+    name: multus
+    namespace: openshift-multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:24Z"
+    name: multus-whereabouts
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3375"
+    uid: 84316ffd-ddab-4976-b7f0-9c83f7ae8a3d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: whereabouts-cni
+  subjects:
+  - kind: ServiceAccount
+    name: multus-ancillary-tools
+    namespace: openshift-multus
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:39Z"
+    name: network-diagnostics
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3758"
+    uid: 85f99cd1-a927-4618-b9e0-b3ebea06454c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: network-diagnostics
+  subjects:
+  - kind: ServiceAccount
+    name: network-diagnostics
+    namespace: openshift-network-diagnostics
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:41Z"
+    name: network-node-identity
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3821"
+    uid: d58be315-16c1-44f9-b31c-222480ae6909
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: network-node-identity
+  subjects:
+  - kind: ServiceAccount
+    name: network-node-identity
+    namespace: openshift-network-node-identity
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-25T12:42:45Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: nfd.4.17.0-202507011904
+    name: nfd-gc
+    resourceVersion: "416234"
+    uid: ab98a2d9-7efa-4d03-b751-21698ba3d0d0
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: nfd-gc
+  subjects:
+  - kind: ServiceAccount
+    name: nfd-gc
+    namespace: openshift-nfd
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-25T12:42:46Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: nfd.4.17.0-202507011904
+    name: nfd-master
+    resourceVersion: "416300"
+    uid: 0b8859a4-518e-4dab-abe3-d8b8012aa2e6
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: nfd-master
+  subjects:
+  - kind: ServiceAccount
+    name: nfd-master
+    namespace: openshift-nfd
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-25T12:42:46Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: nfd.4.17.0-202507011904
+    name: nfd-prune
+    resourceVersion: "416250"
+    uid: 5290075c-9109-4f03-807c-4a3668cf3ed4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: nfd-prune
+  subjects:
+  - kind: ServiceAccount
+    name: nfd-prune
+    namespace: node-feature-discovery-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-25T12:42:47Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: nfd.4.17.0-202507011904
+    name: nfd-topology-updater
+    resourceVersion: "416214"
+    uid: 3d497537-5699-4b0e-b59c-b27705de22f5
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: nfd-topology-updater
+  subjects:
+  - kind: ServiceAccount
+    name: nfd-topology-updater
+    namespace: node-feature-discovery
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-07-09T07:46:28Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: nfd.4.17.0-202507011904
+      olm.owner.kind: ClusterServiceVersion
+      olm.owner.namespace: openshift-nfd
+      olm.permissions.hash: 8W7msVu5kcFKwnscJg2evYoGq0nHXGC1iA307c
+      operators.coreos.com/nfd.openshift-nfd: ""
+    name: nfd.4.17.0-202507011904-cxgHVogPVc3ykQidVeUXYsPSypDZ1RzfKktiKY
+    resourceVersion: "416607"
+    uid: 6c12a521-7fcc-477e-8ec1-766d681baafe
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: nfd.4.17.0-202507011904-cxgHVogPVc3ykQidVeUXYsPSypDZ1RzfKktiKY
+  subjects:
+  - kind: ServiceAccount
+    name: nfd-manager
+    namespace: openshift-nfd
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:50Z"
+    labels:
+      app.kubernetes.io/component: exporter
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: node-exporter
+      app.kubernetes.io/part-of: openshift-monitoring
+      app.kubernetes.io/version: 1.8.2
+    name: node-exporter
+    resourceVersion: "22430"
+    uid: 60ef3b9f-2c66-4a6a-929b-5807d702724e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: node-exporter
+  subjects:
+  - kind: ServiceAccount
+    name: node-exporter
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: OperatorLifecycleManager
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:50Z"
+    name: olm-operator-binding-openshift-operator-lifecycle-manager
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1955"
+    uid: 39cdd1ea-7c07-4a10-87dd-ed5073b1558e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:operator-lifecycle-manager
+  subjects:
+  - kind: ServiceAccount
+    name: olm-operator-serviceaccount
+    namespace: openshift-operator-lifecycle-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CSISnapshot
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:38Z"
+    name: openshift-csi-snapshot-controller-role
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1372"
+    uid: ff4417a2-f304-4a60-a595-71ea8a21a779
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-csi-snapshot-controller-runner
+  subjects:
+  - kind: ServiceAccount
+    name: csi-snapshot-controller
+    namespace: openshift-cluster-storage-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:01Z"
+    name: openshift-dns
+    resourceVersion: "8781"
+    uid: ead7fccb-8e84-4972-8fd0-0752dbc76c5a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-dns
+  subjects:
+  - kind: ServiceAccount
+    name: dns
+    namespace: openshift-dns
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:34Z"
+    name: openshift-dns-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1182"
+    uid: 65e209ac-1898-4b38-9b91-f5d594985d81
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-dns-operator
+  subjects:
+  - kind: ServiceAccount
+    name: dns-operator
+    namespace: openshift-dns-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      imageregistry.operator.openshift.io/checksum: sha256:9c18924fae4eab4651205fc268268a67bd4b9025164b242656ab8e009955b634
+    creationTimestamp: "2025-06-18T10:42:57Z"
+    name: openshift-image-registry-pruner
+    resourceVersion: "8465"
+    uid: 45c4ffe6-a5e5-4aa4-8e80-0cea68ca5c05
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:image-pruner
+  subjects:
+  - kind: ServiceAccount
+    name: pruner
+    namespace: openshift-image-registry
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: Ingress
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:43Z"
+    name: openshift-ingress-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1681"
+    uid: 91908826-8c68-4585-8289-dcebd14aed69
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-ingress-operator
+  subjects:
+  - kind: ServiceAccount
+    name: ingress-operator
+    namespace: openshift-ingress-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:57Z"
+    name: openshift-ingress-router
+    resourceVersion: "8488"
+    uid: 1d85ff16-c70c-4464-99ab-e8a1a3b47ff7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-ingress-router
+  subjects:
+  - kind: ServiceAccount
+    name: router
+    namespace: openshift-ingress
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:43Z"
+    name: openshift-iptables-alerter
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3871"
+    uid: e3b7ebb2-9fc3-4eb8-8840-87d246010aae
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-iptables-alerter
+  subjects:
+  - kind: ServiceAccount
+    name: iptables-alerter
+    namespace: openshift-network-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:33Z"
+    name: openshift-ovn-kubernetes-control-plane-limited
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3632"
+    uid: 8582e970-e338-4628-aa6c-de90f30a70ac
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-ovn-kubernetes-control-plane-limited
+  subjects:
+  - kind: ServiceAccount
+    name: ovn-kubernetes-control-plane
+    namespace: openshift-ovn-kubernetes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:32Z"
+    name: openshift-ovn-kubernetes-node-identity-limited
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3616"
+    uid: 0cc59141-ec48-43b4-bba5-82e7f30c3d51
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-ovn-kubernetes-node-limited
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:ovn-nodes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:39:33Z"
+    name: openshift-ovn-kubernetes-node-kube-rbac-proxy
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Network
+      name: cluster
+      uid: 5fc3c7df-8d9e-40ab-a9a9-8267d9242d4d
+    resourceVersion: "3621"
+    uid: b79900b7-b4d5-4b04-b607-d5f61649b73d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-ovn-kubernetes-kube-rbac-proxy
+  subjects:
+  - kind: ServiceAccount
+    name: ovn-kubernetes-node
+    namespace: openshift-ovn-kubernetes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:50Z"
+    labels:
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: openshift-state-metrics
+    resourceVersion: "22446"
+    uid: 8a9433fa-bb31-474b-aeba-06bda1685199
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openshift-state-metrics
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-state-metrics
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CloudControllerManager
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:24Z"
+    name: openstack-cloud-controller-manager
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2781"
+    uid: 50c7cd62-08ce-40b9-ac62-d91ee760c60c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: openstack-cloud-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: cloud-controller-manager
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:03Z"
+    labels:
+      olm.managed: "true"
+      olm.owner: packageserver
+      olm.owner.kind: ClusterServiceVersion
+      olm.owner.namespace: openshift-operator-lifecycle-manager
+    name: packageserver-service-system:auth-delegator
+    resourceVersion: "8959"
+    uid: 326ba096-0b5f-4c05-a95d-0247298abc49
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - kind: ServiceAccount
+    name: olm-operator-serviceaccount
+    namespace: openshift-operator-lifecycle-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:50Z"
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/instance: k8s
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: openshift-monitoring
+      app.kubernetes.io/version: 2.53.1
+    name: prometheus-k8s
+    resourceVersion: "22426"
+    uid: 27d98a12-d64b-4b99-9fe6-069362650ee4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: prometheus-k8s
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:49Z"
+    name: prometheus-k8s-scheduler-resources
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1902"
+    uid: a43fb93b-2ee2-41f7-bc91-abd756be9626
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: prometheus-k8s-scheduler-resources
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:55Z"
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: prometheus-operator
+      app.kubernetes.io/part-of: openshift-monitoring
+      app.kubernetes.io/version: 0.75.2
+    name: prometheus-operator
+    resourceVersion: "8338"
+    uid: e1c010bc-5ffa-41ae-8bbf-1990356d7c86
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: prometheus-operator
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-operator
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: ImageRegistry
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:28Z"
+    name: registry-monitoring
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "864"
+    uid: 9aa5acf3-1657-4a14-805c-7a7d21c6f2c0
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: registry-monitoring
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:57Z"
+    name: router-monitoring
+    resourceVersion: "8556"
+    uid: a1df492b-7d37-41e9-bb04-1a718049de71
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: router-monitoring
+  subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: self-access-reviewers
+    resourceVersion: "11024"
+    uid: d24177db-1518-4b0d-a56c-46968ac07553
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: self-access-reviewer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: self-provisioners
+    resourceVersion: "11025"
+    uid: 5c73c961-9fbc-4a5f-a387-1415f2c8b17d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: self-provisioner
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated:oauth
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: storage-version-migration-migrator
+    resourceVersion: "5570"
+    uid: d0ef049f-4fb9-4870-bdbb-d8453adc4f2f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: kube-storage-version-migrator-sa
+    namespace: openshift-kube-storage-version-migrator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:37:00Z"
+    name: system-bootstrap-node-bootstrapper
+    resourceVersion: "534"
+    uid: 0cad8387-a38e-4e7a-a0fb-6a36413ab4e4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-bootstrapper
+  subjects:
+  - kind: ServiceAccount
+    name: node-bootstrapper
+    namespace: openshift-machine-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:43:04Z"
+    name: system-bootstrap-node-renewal
+    resourceVersion: "9082"
+    uid: 7753be33-9b83-4907-8044-1929f4f0748b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:certificates.k8s.io:certificatesigningrequests:selfnodeclient
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:nodes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:basic-user
+    resourceVersion: "156"
+    uid: 6767ac02-122e-49a2-9856-fb3c4a07d3bf
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:basic-user
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:build-strategy-docker-binding
+    resourceVersion: "11034"
+    uid: cda29c75-90a2-4282-ab42-3138909a7ebd
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:build-strategy-docker
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:build-strategy-jenkinspipeline-binding
+    resourceVersion: "11036"
+    uid: d98733f3-dacd-41ba-bb83-34c3e8f55e9a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:build-strategy-jenkinspipeline
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:build-strategy-source-binding
+    resourceVersion: "11035"
+    uid: b4b7a173-258e-4858-88e8-b3fdd0b7b322
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:build-strategy-source
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:attachdetach-controller
+    resourceVersion: "169"
+    uid: 0c32c2a4-e545-4f6d-9891-b7bddd4ae791
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:attachdetach-controller
+  subjects:
+  - kind: ServiceAccount
+    name: attachdetach-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:certificate-controller
+    resourceVersion: "195"
+    uid: 1ef1e9c0-6373-4619-b73f-44ecd4b33c69
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:certificate-controller
+  subjects:
+  - kind: ServiceAccount
+    name: certificate-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:clusterrole-aggregation-controller
+    resourceVersion: "170"
+    uid: 70dcf17f-519d-4995-a945-e469e8ca685b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:clusterrole-aggregation-controller
+  subjects:
+  - kind: ServiceAccount
+    name: clusterrole-aggregation-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:cronjob-controller
+    resourceVersion: "171"
+    uid: ca72e2cf-992c-43cf-a518-30b5ce1f857a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:cronjob-controller
+  subjects:
+  - kind: ServiceAccount
+    name: cronjob-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:daemon-set-controller
+    resourceVersion: "172"
+    uid: b60cab9f-6f64-4040-a70c-6e9f7eb2d5c9
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:daemon-set-controller
+  subjects:
+  - kind: ServiceAccount
+    name: daemon-set-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:deployment-controller
+    resourceVersion: "173"
+    uid: 4e2bea43-89f3-4f8a-8d27-2a78586c52c1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:deployment-controller
+  subjects:
+  - kind: ServiceAccount
+    name: deployment-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:disruption-controller
+    resourceVersion: "174"
+    uid: ca8d7671-552f-4fca-8ea5-9487a5cc1062
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:disruption-controller
+  subjects:
+  - kind: ServiceAccount
+    name: disruption-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:endpoint-controller
+    resourceVersion: "175"
+    uid: 6c739b4c-a4c9-491f-931d-5eceeb7376f4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:endpoint-controller
+  subjects:
+  - kind: ServiceAccount
+    name: endpoint-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:endpointslice-controller
+    resourceVersion: "176"
+    uid: ef3ab662-c63e-4230-9b45-1fba802e85e1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:endpointslice-controller
+  subjects:
+  - kind: ServiceAccount
+    name: endpointslice-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:endpointslicemirroring-controller
+    resourceVersion: "177"
+    uid: 09e48aea-3a41-43ba-8518-09879db7ea63
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:endpointslicemirroring-controller
+  subjects:
+  - kind: ServiceAccount
+    name: endpointslicemirroring-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:ephemeral-volume-controller
+    resourceVersion: "179"
+    uid: dc878016-860a-41a6-84a5-78fa192ef914
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:ephemeral-volume-controller
+  subjects:
+  - kind: ServiceAccount
+    name: ephemeral-volume-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:expand-controller
+    resourceVersion: "178"
+    uid: 67230e23-515c-44cd-9b0a-a32421fb5908
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:expand-controller
+  subjects:
+  - kind: ServiceAccount
+    name: expand-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:generic-garbage-collector
+    resourceVersion: "180"
+    uid: 2b5ab1d4-7b51-4213-a2ee-f33fa677324c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:generic-garbage-collector
+  subjects:
+  - kind: ServiceAccount
+    name: generic-garbage-collector
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:horizontal-pod-autoscaler
+    resourceVersion: "11069"
+    uid: ac1473a1-6bae-4a0e-872c-e663c04966ad
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:horizontal-pod-autoscaler
+  subjects:
+  - kind: ServiceAccount
+    name: horizontal-pod-autoscaler
+    namespace: kube-system
+  - kind: ServiceAccount
+    name: horizontal-pod-autoscaler
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:job-controller
+    resourceVersion: "182"
+    uid: 70dde595-986f-4b02-97c0-bf2e44dcd7ea
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:job-controller
+  subjects:
+  - kind: ServiceAccount
+    name: job-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:legacy-service-account-token-cleaner
+    resourceVersion: "202"
+    uid: d0dd005a-6005-4f71-bdfa-c3b7b6ceab82
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:legacy-service-account-token-cleaner
+  subjects:
+  - kind: ServiceAccount
+    name: legacy-service-account-token-cleaner
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:namespace-controller
+    resourceVersion: "183"
+    uid: b94c47c1-2853-42ed-9876-8bbee015c52e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:namespace-controller
+  subjects:
+  - kind: ServiceAccount
+    name: namespace-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:node-controller
+    resourceVersion: "184"
+    uid: f22fdce4-4ffe-4b08-b884-1fc153876618
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:node-controller
+  subjects:
+  - kind: ServiceAccount
+    name: node-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:persistent-volume-binder
+    resourceVersion: "185"
+    uid: 15368f0e-751b-476f-a644-e056bab36d3f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:persistent-volume-binder
+  subjects:
+  - kind: ServiceAccount
+    name: persistent-volume-binder
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:pod-garbage-collector
+    resourceVersion: "186"
+    uid: 0d6b7369-b111-48cd-9fa4-2a13c08b5f62
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:pod-garbage-collector
+  subjects:
+  - kind: ServiceAccount
+    name: pod-garbage-collector
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:pv-protection-controller
+    resourceVersion: "197"
+    uid: a6252b98-2645-4fca-810d-6aad24417298
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:pv-protection-controller
+  subjects:
+  - kind: ServiceAccount
+    name: pv-protection-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:pvc-protection-controller
+    resourceVersion: "196"
+    uid: c2b0820b-2b16-44bd-9d5b-723fafdc0069
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:pvc-protection-controller
+  subjects:
+  - kind: ServiceAccount
+    name: pvc-protection-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:replicaset-controller
+    resourceVersion: "187"
+    uid: f791c0ad-a5b5-4157-9fff-8fbfa1bf1e07
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:replicaset-controller
+  subjects:
+  - kind: ServiceAccount
+    name: replicaset-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:replication-controller
+    resourceVersion: "188"
+    uid: adeb16ef-c12e-4e23-b449-5e6e1586171e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:replication-controller
+  subjects:
+  - kind: ServiceAccount
+    name: replication-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:resourcequota-controller
+    resourceVersion: "189"
+    uid: 57523b05-66bc-4dde-9b00-e8bc57996d6b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:resourcequota-controller
+  subjects:
+  - kind: ServiceAccount
+    name: resourcequota-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:root-ca-cert-publisher
+    resourceVersion: "199"
+    uid: 20759763-b1e7-47e3-924b-e3a1b51f8a61
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:root-ca-cert-publisher
+  subjects:
+  - kind: ServiceAccount
+    name: root-ca-cert-publisher
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:route-controller
+    resourceVersion: "190"
+    uid: 1706fef1-91c0-47c2-b38e-b0b82782a963
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:route-controller
+  subjects:
+  - kind: ServiceAccount
+    name: route-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:service-account-controller
+    resourceVersion: "191"
+    uid: 752bb91a-0cc3-413d-8220-d07eef9fd74b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:service-account-controller
+  subjects:
+  - kind: ServiceAccount
+    name: service-account-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:service-ca-cert-publisher
+    resourceVersion: "200"
+    uid: 59d9cb2d-3aa3-4d36-8ca9-4b2c47f18725
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:service-ca-cert-publisher
+  subjects:
+  - kind: ServiceAccount
+    name: service-ca-cert-publisher
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:service-controller
+    resourceVersion: "192"
+    uid: 75f9fe7c-5922-4dde-a10a-1d8607ce0de7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:service-controller
+  subjects:
+  - kind: ServiceAccount
+    name: service-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:statefulset-controller
+    resourceVersion: "193"
+    uid: 92de7585-dcb3-4367-b9c4-8c6db075f1d6
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:statefulset-controller
+  subjects:
+  - kind: ServiceAccount
+    name: statefulset-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:ttl-after-finished-controller
+    resourceVersion: "198"
+    uid: 154dd017-37ca-42c6-bd5e-a724eda4e855
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:ttl-after-finished-controller
+  subjects:
+  - kind: ServiceAccount
+    name: ttl-after-finished-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:ttl-controller
+    resourceVersion: "194"
+    uid: da760d04-5c41-4d90-8f6e-052959fe617b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:ttl-controller
+  subjects:
+  - kind: ServiceAccount
+    name: ttl-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:controller:validatingadmissionpolicy-status-controller
+    resourceVersion: "201"
+    uid: 8e593130-11be-4dbd-9591-eb00c986d746
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:validatingadmissionpolicy-status-controller
+  subjects:
+  - kind: ServiceAccount
+    name: validatingadmissionpolicy-status-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:deployer
+    resourceVersion: "5573"
+    uid: 065a156f-a8bc-4b6c-816c-cb27421fa550
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:deployer
+  subjects:
+  - kind: ServiceAccount
+    name: default-rolebindings-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:discovery
+    resourceVersion: "153"
+    uid: 1d80950c-48c2-432e-aed7-4bdcb4d833a8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:discovery
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:image-builder
+    resourceVersion: "11072"
+    uid: 1575746c-ac64-4e13-8e09-217c376dab65
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:image-builder
+  subjects:
+  - kind: ServiceAccount
+    name: default-rolebindings-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:image-puller
+    resourceVersion: "11071"
+    uid: 4e4d0786-b715-4f58-82d8-68248887f9fb
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:image-puller
+  subjects:
+  - kind: ServiceAccount
+    name: default-rolebindings-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:kube-controller-manager
+    resourceVersion: "162"
+    uid: d651fc02-01c6-414d-8fbe-efedeef765da
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:kube-controller-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:kube-dns
+    resourceVersion: "163"
+    uid: 712364e8-7803-43c2-abd6-8ae5729c9e61
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:kube-dns
+  subjects:
+  - kind: ServiceAccount
+    name: kube-dns
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:kube-scheduler
+    resourceVersion: "164"
+    uid: e439e1c5-7270-4e2e-a237-93f659c4d198
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:kube-scheduler
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:masters
+    resourceVersion: "11017"
+    uid: cdf2d917-1b32-4650-82cf-249467ea1ebe
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:master
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:masters
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:52Z"
+    labels:
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: metrics-server
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: system:metrics-server
+    resourceVersion: "22603"
+    uid: c931395a-c6ea-4f1c-a1cd-d921439f90b8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:metrics-server
+  subjects:
+  - kind: ServiceAccount
+    name: metrics-server
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:monitoring
+    resourceVersion: "152"
+    uid: 4df4bc71-bde7-4709-8e50-2219e994b410
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:monitoring
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:node
+    resourceVersion: "166"
+    uid: d33bb9fa-6781-431c-9d3b-5adab6e54693
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:node-admin
+    resourceVersion: "168"
+    uid: c4a1bb06-1b87-40a9-83dd-ad33f89febde
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:master
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-apiserver
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:node-admins
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:node-admins
+    resourceVersion: "11020"
+    uid: a1346fc3-955d-46ec-a406-e145b594e85d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:master
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:node-admins
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:node-bootstrapper
+    resourceVersion: "11037"
+    uid: a1a957e0-9760-4d78-b197-6c2cd7c9a5ff
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-bootstrapper
+  subjects:
+  - kind: ServiceAccount
+    name: node-bootstrapper
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:node-proxier
+    resourceVersion: "161"
+    uid: 0fb4f1a5-c8f7-47d1-9de4-25ef7fd7f00b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-proxier
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-proxy
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:node-proxiers
+    resourceVersion: "11029"
+    uid: 13b07442-17f4-43e2-a726-127f59ad6e6d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-proxier
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:nodes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:oauth-token-deleters
+    resourceVersion: "11026"
+    uid: f8443d20-30bb-49d5-87d4-e32e5fa5ca27
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:oauth-token-deleter
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:build-config-change-controller
+    resourceVersion: "11043"
+    uid: f4636f36-7ae6-4ecd-82e0-093951c57808
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:build-config-change-controller
+  subjects:
+  - kind: ServiceAccount
+    name: build-config-change-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:build-controller
+    resourceVersion: "11041"
+    uid: 1daf67b8-1c34-4464-a896-de96474cff9c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:build-controller
+  subjects:
+  - kind: ServiceAccount
+    name: build-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:41:55Z"
+    name: system:openshift:controller:cluster-csr-approver-controller
+    resourceVersion: "6243"
+    uid: 3351dd51-469c-41fe-82d1-03195d700d5d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:cluster-csr-approver-controller
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-csr-approver-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:cluster-quota-reconciliation-controller
+    resourceVersion: "11061"
+    uid: 2f1f191b-5606-4f0f-90b0-00316a558a8d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:cluster-quota-reconciliation-controller
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-quota-reconciliation-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:default-rolebindings-controller
+    resourceVersion: "11074"
+    uid: e41edc1f-4d99-49da-a2fc-87a94ffec2aa
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:default-rolebindings-controller
+  subjects:
+  - kind: ServiceAccount
+    name: default-rolebindings-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:deployer-controller
+    resourceVersion: "11048"
+    uid: b5805e7d-eecd-4d9f-be73-ebf8c097a0f9
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:deployer-controller
+  subjects:
+  - kind: ServiceAccount
+    name: deployer-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:deploymentconfig-controller
+    resourceVersion: "11050"
+    uid: 08413fef-b751-4d51-bb12-841269a22ea4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:deploymentconfig-controller
+  subjects:
+  - kind: ServiceAccount
+    name: deploymentconfig-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:horizontal-pod-autoscaler
+    resourceVersion: "11068"
+    uid: 33e6c42a-a9f1-4341-a16b-572c2a5d9d21
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:horizontal-pod-autoscaler
+  subjects:
+  - kind: ServiceAccount
+    name: horizontal-pod-autoscaler
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:image-import-controller
+    resourceVersion: "11060"
+    uid: d8c9c585-7f95-4320-9f3c-a58e09b0f26c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:image-import-controller
+  subjects:
+  - kind: ServiceAccount
+    name: image-import-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:image-trigger-controller
+    resourceVersion: "11059"
+    uid: 35ec6b38-ac28-4b27-a78f-f39957c7fb49
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:image-trigger-controller
+  subjects:
+  - kind: ServiceAccount
+    name: image-trigger-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:00Z"
+    name: system:openshift:controller:kube-apiserver-check-endpoints-auth-delegator
+    resourceVersion: "6662"
+    uid: 9afd7c12-3452-419a-8f95-77bd93cb9197
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:serviceaccount:openshift-kube-apiserver:check-endpoints
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:00Z"
+    name: system:openshift:controller:kube-apiserver-check-endpoints-crd-reader
+    resourceVersion: "6697"
+    uid: ee0714e4-7385-4db6-add9-6c76454cc858
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:check-endpoints-crd-reader
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:serviceaccount:openshift-kube-apiserver:check-endpoints
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:00Z"
+    name: system:openshift:controller:kube-apiserver-check-endpoints-node-reader
+    resourceVersion: "6672"
+    uid: 2e9f40a4-b9a2-4a02-8bcc-88c78487ed0f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:check-endpoints-node-reader
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:serviceaccount:openshift-kube-apiserver:check-endpoints
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:15Z"
+    name: system:openshift:controller:machine-approver
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2586"
+    uid: 80905066-f336-4eab-807f-7bf18f8fb7f1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:machine-approver
+  subjects:
+  - kind: ServiceAccount
+    name: machine-approver-sa
+    namespace: openshift-cluster-machine-approver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:45Z"
+    name: system:openshift:controller:namespace-security-allocation-controller
+    resourceVersion: "351"
+    uid: bdadf36d-6980-4bee-a298-b02b3f85b77c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:namespace-security-allocation-controller
+  subjects:
+  - kind: ServiceAccount
+    name: namespace-security-allocation-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:origin-namespace-controller
+    resourceVersion: "11056"
+    uid: 27f939fc-31a0-471b-b502-c27475320391
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:origin-namespace-controller
+  subjects:
+  - kind: ServiceAccount
+    name: origin-namespace-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:49Z"
+    name: system:openshift:controller:podsecurity-admission-label-syncer-controller
+    resourceVersion: "365"
+    uid: 2cd72998-2d2a-47e1-8e8c-e51fd7d0a062
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:podsecurity-admission-label-syncer-controller
+  subjects:
+  - kind: ServiceAccount
+    name: podsecurity-admission-label-syncer-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:36:48Z"
+    name: system:openshift:controller:privileged-namespaces-psa-label-syncer
+    resourceVersion: "361"
+    uid: c38f5749-1cef-4815-ac23-2319f8ff118c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:privileged-namespaces-psa-label-syncer
+  subjects:
+  - kind: ServiceAccount
+    name: privileged-namespaces-psa-label-syncer
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:pv-recycler-controller
+    resourceVersion: "11066"
+    uid: dd4f42d1-ec19-4f96-95bb-25c34cf7a087
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:pv-recycler-controller
+  subjects:
+  - kind: ServiceAccount
+    name: pv-recycler-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:resourcequota-controller
+    resourceVersion: "11067"
+    uid: 84705947-08d8-4a75-ac4c-eb188eae3b21
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:resourcequota-controller
+  subjects:
+  - kind: ServiceAccount
+    name: resourcequota-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:openshift:controller:service-ca
+    resourceVersion: "5500"
+    uid: 16e0fa91-39b0-4364-923f-acf355f1b735
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:service-ca
+  subjects:
+  - kind: ServiceAccount
+    name: service-ca
+    namespace: openshift-service-ca
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:service-ingress-ip-controller
+    resourceVersion: "11065"
+    uid: 930aeb7b-d487-4aae-ab2a-cca0d2ec2dd3
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:service-ingress-ip-controller
+  subjects:
+  - kind: ServiceAccount
+    name: service-ingress-ip-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:serviceaccount-controller
+    resourceVersion: "11057"
+    uid: 930e336e-81a2-4f20-9886-66f5d6359824
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:serviceaccount-controller
+  subjects:
+  - kind: ServiceAccount
+    name: serviceaccount-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:serviceaccount-pull-secrets-controller
+    resourceVersion: "11058"
+    uid: 0c828752-ae9a-4b23-b7a2-e09ca0ff02fc
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:serviceaccount-pull-secrets-controller
+  subjects:
+  - kind: ServiceAccount
+    name: serviceaccount-pull-secrets-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:template-instance-controller
+    resourceVersion: "11051"
+    uid: 8696ff2d-593b-4b92-846a-4d4ef6df3794
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:template-instance-controller
+  subjects:
+  - kind: ServiceAccount
+    name: template-instance-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:template-instance-controller:admin
+    resourceVersion: "11053"
+    uid: cdb4b881-0c6b-4022-ba97-72df4c70998e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: admin
+  subjects:
+  - kind: ServiceAccount
+    name: template-instance-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:template-instance-finalizer-controller
+    resourceVersion: "11054"
+    uid: 582d82c7-4081-4e8e-861c-c71906473fa4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:template-instance-finalizer-controller
+  subjects:
+  - kind: ServiceAccount
+    name: template-instance-finalizer-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:controller:template-instance-finalizer-controller:admin
+    resourceVersion: "11055"
+    uid: 77bb4bf4-5750-422f-907b-d3864b03b2c8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: admin
+  subjects:
+  - kind: ServiceAccount
+    name: template-instance-finalizer-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:template-service-broker
+    resourceVersion: "11070"
+    uid: c1bf08c2-d7c1-47a1-8e0b-e42c22fb4b06
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:template-service-broker
+  subjects:
+  - kind: ServiceAccount
+    name: template-service-broker
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:26Z"
+    name: system:openshift:controller:unidling-controller
+    resourceVersion: "11063"
+    uid: 5ba6e59a-4ea0-4c77-90fb-ca6f0594bd57
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:controller:unidling-controller
+  subjects:
+  - kind: ServiceAccount
+    name: unidling-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:openshift:discovery
+    resourceVersion: "11033"
+    uid: 688b9315-0d98-4736-8795-64addff2a783
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:discovery
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:54Z"
+    name: system:openshift:oauth-apiserver
+    resourceVersion: "6207"
+    uid: bff60d80-c4b3-4149-9570-21d65e266304
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: oauth-apiserver-sa
+    namespace: openshift-oauth-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:52Z"
+    name: system:openshift:openshift-apiserver
+    resourceVersion: "6050"
+    uid: f20fac35-3a64-47da-8006-47e36235b654
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-apiserver-sa
+    namespace: openshift-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:55Z"
+    name: system:openshift:openshift-authentication
+    resourceVersion: "6287"
+    uid: a9943704-b7eb-40a1-b3d9-f8a1951a29a7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: oauth-openshift
+    namespace: openshift-authentication
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:47Z"
+    name: system:openshift:openshift-controller-manager
+    resourceVersion: "5319"
+    uid: 103d81e8-1a08-43ea-b84d-0fb18c822b2b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:openshift-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-controller-manager-sa
+    namespace: openshift-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:openshift:openshift-controller-manager:image-trigger-controller
+    resourceVersion: "5602"
+    uid: b00cb65f-9a59-4066-8dc9-10c33355255c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:openshift-controller-manager:image-trigger-controller
+  subjects:
+  - kind: ServiceAccount
+    name: image-trigger-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:openshift:openshift-controller-manager:ingress-to-route-controller
+    resourceVersion: "5464"
+    uid: de1cc388-8db3-471a-a988-1442b0282cc1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:openshift-controller-manager:ingress-to-route-controller
+  subjects:
+  - kind: ServiceAccount
+    name: ingress-to-route-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:openshift:openshift-controller-manager:update-buildconfig-status
+    resourceVersion: "5550"
+    uid: 3c9757ea-028c-4374-96e5-7c1e6805aa56
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:openshift-controller-manager:update-buildconfig-status
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-controller-manager-sa
+    namespace: openshift-controller-manager
+  - kind: ServiceAccount
+    name: build-config-change-controller
+    namespace: openshift-infra
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:47Z"
+    name: system:openshift:openshift-route-controller-manager
+    resourceVersion: "5368"
+    uid: af5c4341-89f3-4af5-9415-0ed48aeb895c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:openshift-route-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: route-controller-manager-sa
+    namespace: openshift-route-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:41Z"
+    name: system:openshift:operator:authentication
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1550"
+    uid: 86fec234-ac9d-42de-893d-34c0ce9f6867
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: authentication-operator
+    namespace: openshift-authentication-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      capability.openshift.io/name: CloudControllerManager
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:38:18Z"
+    name: system:openshift:operator:cloud-controller-manager
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2646"
+    uid: 0035ea85-c5ad-4ba1-960a-c4db15f9fcec
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:operator:cloud-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: cluster-cloud-controller-manager
+    namespace: openshift-cloud-controller-manager-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:36Z"
+    name: system:openshift:operator:cluster-kube-scheduler-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1288"
+    uid: 887a61d2-effa-4ff8-a73a-ea0a4cb83f16
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-kube-scheduler-operator
+    namespace: openshift-kube-scheduler-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:41:52Z"
+    name: system:openshift:operator:etcd-backup-crb
+    resourceVersion: "6035"
+    uid: bd4968b3-4381-447c-856a-9af5e49f3b82
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:operator:etcd-backup-role
+  subjects:
+  - kind: ServiceAccount
+    name: etcd-backup-sa
+    namespace: openshift-etcd
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:42Z"
+    name: system:openshift:operator:etcd-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1589"
+    uid: 09ba64d8-3b69-4f86-a1b3-67f40b90c45d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: etcd-operator
+    namespace: openshift-etcd-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:53Z"
+    name: system:openshift:operator:kube-apiserver-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2083"
+    uid: 91b14f8f-0df6-4906-a8aa-a7a998a4f6c4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: kube-apiserver-operator
+    namespace: openshift-kube-apiserver-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:42:03Z"
+    name: system:openshift:operator:kube-apiserver-recovery
+    resourceVersion: "6822"
+    uid: e55aa986-38c8-4479-a56c-d8176e016fdf
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: localhost-recovery-client
+    namespace: openshift-kube-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:36Z"
+    name: system:openshift:operator:kube-controller-manager-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1285"
+    uid: c5093c22-2ed5-4132-88a8-0f883bc726ba
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: kube-controller-manager-operator
+    namespace: openshift-kube-controller-manager-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:54Z"
+    name: system:openshift:operator:kube-controller-manager-recovery
+    resourceVersion: "6208"
+    uid: a5168da8-1afc-4360-964c-234956174422
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: localhost-recovery-client
+    namespace: openshift-kube-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:57Z"
+    name: system:openshift:operator:kube-scheduler-recovery
+    resourceVersion: "6401"
+    uid: bc92aa7a-7375-4b9e-935e-2eda8b1f5e8a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: localhost-recovery-client
+    namespace: openshift-kube-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:53Z"
+    name: system:openshift:operator:kube-scheduler:public-2
+    resourceVersion: "6132"
+    uid: 6212fbe8-a6fd-497d-9ab9-d3105ec8009c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:kube-scheduler
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-kube-scheduler-sa
+    namespace: openshift-kube-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+    creationTimestamp: "2025-06-18T10:37:36Z"
+    name: system:openshift:operator:kube-storage-version-migrator-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1298"
+    uid: 1a1b54ee-183a-4e41-83fd-4debf3bcb0b5
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: kube-storage-version-migrator-operator
+    namespace: openshift-kube-storage-version-migrator-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:36Z"
+    name: system:openshift:operator:openshift-apiserver-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1284"
+    uid: 2671e2f6-9d1a-4f6b-9c86-8a3b55ab705a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-apiserver-operator
+    namespace: openshift-apiserver-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:55Z"
+    name: system:openshift:operator:openshift-config-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "2213"
+    uid: 68939222-6ba0-44c5-a772-4a6a42eceda8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-config-operator
+    namespace: openshift-config-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:37Z"
+    name: system:openshift:operator:openshift-controller-manager-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1326"
+    uid: f5a4ddbb-3247-4270-a5fb-07e8d7bfe165
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-controller-manager-operator
+    namespace: openshift-controller-manager-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:49Z"
+    name: system:openshift:operator:openshift-etcd-installer
+    resourceVersion: "5709"
+    uid: 2f433093-a7eb-4ddd-a7cd-5db76765445e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: installer-sa
+    namespace: openshift-etcd
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:54Z"
+    name: system:openshift:operator:openshift-kube-apiserver-installer
+    resourceVersion: "6233"
+    uid: 7a4b111a-6db6-4d54-a8b7-a3adbe247177
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: installer-sa
+    namespace: openshift-kube-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:52Z"
+    name: system:openshift:operator:openshift-kube-controller-manager-installer
+    resourceVersion: "6070"
+    uid: 6fa314cf-0933-4579-bace-aebee0ed0a1f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: installer-sa
+    namespace: openshift-kube-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:51Z"
+    name: system:openshift:operator:openshift-kube-scheduler-installer
+    resourceVersion: "6015"
+    uid: 55303c15-140b-4a75-a6ab-7b6d94e4479f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: installer-sa
+    namespace: openshift-kube-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/hypershift: "true"
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:37:27Z"
+    name: system:openshift:operator:service-ca-operator
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "862"
+    uid: b49b18cc-d28e-41fe-98d1-ce1363397ef9
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: service-ca-operator
+    namespace: openshift-service-ca-operator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:openshift:public-info-viewer
+    resourceVersion: "160"
+    uid: d6384478-0d2b-4a7a-9a37-bc21fc7f2621
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:public-info-viewer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:unauthenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      include.release.openshift.io/ibm-cloud-managed: "true"
+      include.release.openshift.io/self-managed-high-availability: "true"
+      include.release.openshift.io/single-node-developer: "true"
+    creationTimestamp: "2025-06-18T10:36:40Z"
+    name: system:openshift:scc:restricted-v2
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6105fe6f-04cb-4e8c-898e-5b476a9b3427
+    resourceVersion: "1631"
+    uid: b8fe1cc0-3faa-40fd-a310-0db8b6495683
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:scc:restricted-v2
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:47Z"
+    name: system:openshift:tokenreview-openshift-controller-manager
+    resourceVersion: "5335"
+    uid: 742443a3-b8f9-4862-9b84-38fbb2394b52
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:tokenreview-openshift-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: openshift-controller-manager-sa
+    namespace: openshift-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:48Z"
+    name: system:openshift:tokenreview-openshift-route-controller-manager
+    resourceVersion: "5457"
+    uid: ad746d64-3a6d-4031-98e1-4589a28117e0
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:tokenreview-openshift-route-controller-manager
+  subjects:
+  - kind: ServiceAccount
+    name: route-controller-manager-sa
+    namespace: openshift-route-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:41:58Z"
+    name: system:openshift:useroauthaccesstoken-manager
+    resourceVersion: "6505"
+    uid: 8c5fe967-a32c-43b6-8c22-801a6c0db16c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:openshift:useroauthaccesstoken-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated:oauth
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:11Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:public-info-viewer
+    resourceVersion: "159"
+    uid: cca0af16-4733-4557-b2e8-cc53e0729c66
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:public-info-viewer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:unauthenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:scope-impersonation
+    resourceVersion: "11039"
+    uid: f09c331d-bea5-4678-9d45-68eb4b675759
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:scope-impersonation
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:sdn-readers
+    resourceVersion: "11031"
+    uid: 8be56fc8-657b-404d-8340-b5ad3e7b0086
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:sdn-reader
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:nodes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:service-account-issuer-discovery
+    resourceVersion: "167"
+    uid: 6f0de071-a389-4314-8d2a-81642c4e3399
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:service-account-issuer-discovery
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:serviceaccounts
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:36:12Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: system:volume-scheduler
+    resourceVersion: "165"
+    uid: c8410bad-2896-4b8d-8882-3a1cee4b9f65
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:volume-scheduler
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2025-06-18T10:44:25Z"
+    name: system:webhooks
+    resourceVersion: "11032"
+    uid: 2404de47-f388-498c-a432-cd5278f84991
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:webhook
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:50Z"
+    labels:
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: telemeter-client
+    resourceVersion: "22437"
+    uid: 5c7164ea-11a6-41a1-b18e-7928a0530097
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: telemeter-client
+  subjects:
+  - kind: ServiceAccount
+    name: telemeter-client
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:51Z"
+    labels:
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/part-of: openshift-monitoring
+    name: telemeter-client-view
+    resourceVersion: "22546"
+    uid: 45dbb198-61cd-4edf-947a-58c9489ed1fa
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-monitoring-view
+  subjects:
+  - kind: ServiceAccount
+    name: telemeter-client
+    namespace: openshift-monitoring
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2025-06-18T10:57:52Z"
+    labels:
+      app.kubernetes.io/component: query-layer
+      app.kubernetes.io/instance: thanos-querier
+      app.kubernetes.io/managed-by: cluster-monitoring-operator
+      app.kubernetes.io/name: thanos-query
+      app.kubernetes.io/part-of: openshift-monitoring
+      app.kubernetes.io/version: 0.35.1
+    name: thanos-querier
+    resourceVersion: "22627"
+    uid: e2306ec4-9e69-428b-a3f6-fcbb2fb0b426
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: thanos-querier
+  subjects:
+  - kind: ServiceAccount
+    name: thanos-querier
+    namespace: openshift-monitoring
+kind: List
+metadata:
+  resourceVersion: ""

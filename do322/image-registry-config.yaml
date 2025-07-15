@@ -1,0 +1,84 @@
+apiVersion: imageregistry.operator.openshift.io/v1
+kind: Config
+metadata:
+  creationTimestamp: "2025-06-18T10:47:57Z"
+  finalizers:
+  - imageregistry.operator.openshift.io/finalizer
+  generation: 1
+  name: cluster
+  resourceVersion: "563007"
+  uid: 26cc1a8c-7a6c-4078-b8ec-58d4f64d54a3
+spec:
+  logLevel: Normal
+  managementState: Removed
+  observedConfig: null
+  operatorLogLevel: Normal
+  proxy: {}
+  replicas: 1
+  requests:
+    read:
+      maxWaitInQueue: 0s
+    write:
+      maxWaitInQueue: 0s
+  rolloutStrategy: RollingUpdate
+  storage: {}
+  unsupportedConfigOverrides: null
+status:
+  conditions:
+  - lastTransitionTime: "2025-06-18T10:47:57Z"
+    reason: AsExpected
+    status: "False"
+    type: ImageConfigControllerDegraded
+  - lastTransitionTime: "2025-07-15T14:41:11Z"
+    message: All registry resources are removed
+    reason: Removed
+    status: "False"
+    type: Progressing
+  - lastTransitionTime: "2025-06-18T10:47:57Z"
+    message: The registry is removed
+    reason: Removed
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2025-06-18T10:47:57Z"
+    message: The registry is removed
+    reason: Removed
+    status: "False"
+    type: Degraded
+  - lastTransitionTime: "2025-06-18T10:47:57Z"
+    message: The registry is removed
+    reason: Removed
+    status: "True"
+    type: Removed
+  - lastTransitionTime: "2025-06-18T10:48:24Z"
+    reason: AsExpected
+    status: "False"
+    type: AzureStackCloudControllerDegraded
+  - lastTransitionTime: "2025-06-18T10:48:34Z"
+    message: The daemon set node-ca has available replicas
+    reason: AsExpected
+    status: "True"
+    type: NodeCADaemonAvailable
+  - lastTransitionTime: "2025-06-18T10:56:56Z"
+    message: The daemon set node-ca is deployed
+    reason: AsExpected
+    status: "False"
+    type: NodeCADaemonProgressing
+  - lastTransitionTime: "2025-06-18T10:48:26Z"
+    reason: AsExpected
+    status: "False"
+    type: NodeCADaemonControllerDegraded
+  - lastTransitionTime: "2025-06-18T10:54:25Z"
+    reason: AsExpected
+    status: "False"
+    type: ImageRegistryCertificatesControllerDegraded
+  generations:
+  - group: apps
+    hash: ""
+    lastGeneration: 1
+    name: node-ca
+    namespace: openshift-image-registry
+    resource: daemonsets
+  observedGeneration: 1
+  readyReplicas: 0
+  storage: {}
+  storageManaged: false
