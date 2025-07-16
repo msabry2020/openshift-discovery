@@ -19,6 +19,7 @@ oc get deployments/image-registry -n openshift-image-registry -o yaml > "$OUTPUT
 #########################################
 echo "[INFO] Exporting Network configurations..."
 oc get networks.config.openshift.io cluster -o yaml > "$OUTPUT_DIR/network-config.yaml"
+oc get -o yaml proxy/cluster > "$OUTPUT_DIR/network-config.yaml"
 
 #########################################
 # Storage Info
@@ -47,7 +48,7 @@ if [ -n "$ingressCert" ]; then
   echo "[INFO] Found ingress certificate: $ingressCert"
   oc get secret $ingressCert -n openshift-ingress -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text > "$OUTPUT_DIR/ingress-certificate-details.txt"
 else
-  echo "[WARN] No ingress certificate configured." > "$OUTPUT_DIR/ingress-certificate-details.txt"
+  oc get secret router-certs-default -n openshift-ingress -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text > "$OUTPUT_DIR/ingress-certificate-details.txt"
 fi
 
 # API certificate
@@ -56,7 +57,7 @@ if [ -n "$apiCert" ]; then
   echo "[INFO] Found API server certificate: $apiCert"
   oc get secret $apiCert -n openshift-config -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text > "$OUTPUT_DIR/api-certificate-details.txt"
 else
-  echo "[WARN] No API certificate configured." > "$OUTPUT_DIR/api-certificate-details.txt"
+  oc get secret external-loadbalancer-serving-certkey -n openshift-kube-apiserver -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text > "$OUTPUT_DIR/api-certificate-details.txt"
 fi
 
 echo "[DONE] All outputs saved in: $OUTPUT_DIR"
